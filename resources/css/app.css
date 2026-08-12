@@ -1,0 +1,40 @@
+@font-face {
+    font-family: 'BPG Nino Mtavruli';
+    src: url('/fonts/bpg-nino-mtavruli/bpg-nino-mtavruli.woff2') format('woff2'),
+         url('/fonts/bpg-nino-mtavruli/bpg-nino-mtavruli.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'DejaVu Sans Condensed';
+    src: url('/fonts/dejavu-sans-condensed/dejavu-sans-condensed.woff2') format('woff2'),
+         url('/fonts/dejavu-sans-condensed/dejavu-sans-condensed.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'DejaVu Sans Condensed';
+    src: url('/fonts/dejavu-sans-condensed/dejavu-sans-condensed-bold.woff2') format('woff2'),
+         url('/fonts/dejavu-sans-condensed/dejavu-sans-condensed-bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    h1, h2, h3, h4, h5, h6 {
+        @apply font-heading uppercase tracking-wide;
+    }
+
+    [x-cloak] {
+        display: none !important;
+    }
+}

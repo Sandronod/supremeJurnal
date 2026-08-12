@@ -1,0 +1,6 @@
+# Upload a COPY of this file, renamed to ".htaccess", inside EACH of these
+# folders (siblings of public/), directly under public_html/journal/:
+#   app/  bootstrap/  config/  database/  resources/  routes/  storage/  vendor/  tests/
+# It blocks all direct web access to that folder and everything inside it.
+
+Require all denied

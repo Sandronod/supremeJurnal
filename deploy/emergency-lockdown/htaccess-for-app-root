@@ -1,0 +1,16 @@
+# EMERGENCY FIX — upload this as ".htaccess" directly inside the folder
+# where you uploaded the whole project (e.g. public_html/journal/.htaccess),
+# NOT inside the public/ subfolder. It blocks direct access to .env and
+# every sensitive folder, while still letting the site work through public/.
+
+RewriteEngine On
+
+# Block .env, .env.*, composer.json/lock, artisan, and any other dotfile.
+<FilesMatch "^(\.env.*|composer\.(json|lock)|artisan|package\.json|package-lock\.json|\.)">
+    Require all denied
+</FilesMatch>
+
+# Forward every request to the public/ subfolder (where Laravel's own
+# index.php + .htaccess actually live), unless it's already going there.
+RewriteCond %{REQUEST_URI} !^/journal/public/
+RewriteRule ^(.*)$ public/$1 [L]

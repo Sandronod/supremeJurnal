@@ -1,0 +1,5 @@
+@import 'trix/dist/trix.css';
+
+trix-editor {
+    min-height: 12rem;
+}
