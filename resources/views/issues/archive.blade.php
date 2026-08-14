@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="bg-white rounded-sm shadow-sm p-6 md:p-10">
-        <h1 class="text-2xl md:text-3xl text-brand-900 mb-8">{{ __('Archive') }}</h1>
+        <h1 class="text-2xl md:text-3xl text-brand-purple mb-8">{{ __('Archive') }}</h1>
 
         @if($issues->isEmpty())
             <p class="text-brand-900/60">{{ __('No issues published yet.') }}</p>

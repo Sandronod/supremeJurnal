@@ -9,7 +9,7 @@
                 @if($isCurrent)
                     <span class="inline-block text-xs uppercase font-heading bg-brand-500 text-white px-2 py-1 mb-2">{{ __('Current') }}</span>
                 @endif
-                <h1 class="text-2xl md:text-3xl text-brand-900">{{ $issue->label }}</h1>
+                <h1 class="text-2xl md:text-3xl text-brand-purple">{{ $issue->label }}</h1>
             </div>
 
             @if($issue->pdf_path)
@@ -20,7 +20,7 @@
             @endif
         </div>
 
-        <h2 class="text-lg text-brand-900 mb-4">{{ __('Articles in this issue') }}</h2>
+        <h2 class="text-lg text-brand-purple mb-4">{{ __('Articles in this issue') }}</h2>
 
         @if($issue->articles->isEmpty())
             <p class="text-brand-900/60">{{ __('No results found.') }}</p>

@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="bg-white rounded-sm shadow-sm p-6 md:p-10">
-        <h1 class="text-2xl md:text-3xl text-brand-900 mb-2">{{ __('Search results') }}</h1>
+        <h1 class="text-2xl md:text-3xl text-brand-purple mb-2">{{ __('Search results') }}</h1>
         @if($query !== '')
             <p class="text-brand-900/60 mb-8">"{{ $query }}"</p>
         @endif

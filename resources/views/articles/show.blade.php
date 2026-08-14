@@ -12,12 +12,12 @@
         <p class="text-sm text-brand-600 mb-2">
             <a href="{{ route('issues.show', $article->issue) }}" class="hover:underline">{{ $article->issue->label }}</a>
         </p>
-        <h1 class="text-2xl md:text-3xl text-brand-900 mb-2">{{ $article->title }}</h1>
+        <h1 class="text-2xl md:text-3xl text-brand-purple mb-2">{{ $article->title }}</h1>
         <p class="text-brand-900/70 mb-8">{{ $article->authors }}</p>
 
         @if($article->abstract)
             <div class="mb-8">
-                <h2 class="text-sm uppercase font-heading text-brand-900/60 mb-2">{{ __('Abstract') }}</h2>
+                <h2 class="text-sm uppercase font-heading text-brand-purple/70 mb-2">{{ __('Abstract') }}</h2>
                 <p class="text-brand-900/90 leading-relaxed">{{ $article->abstract }}</p>
             </div>
         @endif

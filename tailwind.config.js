@@ -19,6 +19,7 @@ module.exports = {
                     600: '#00509d',
                     500: '#0063a6',
                     bg: '#edf2fb',
+                    purple: '#3a2350',
                 },
             },
             fontFamily: {

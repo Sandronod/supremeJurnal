@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="bg-white rounded-sm shadow-sm p-6 md:p-10">
-        <h1 class="text-2xl md:text-3xl text-brand-900 mb-8">{{ __('Contact') }}</h1>
+        <h1 class="text-2xl md:text-3xl text-brand-purple mb-8">{{ __('Contact') }}</h1>
 
         <dl class="space-y-4 mb-8">
             @if($setting->phone)
