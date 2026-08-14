@@ -1,11 +1,15 @@
 {
+  "public/imgs/cover2.jpg": {
+    "file": "assets/cover2-12a06332.jpg",
+    "src": "public/imgs/cover2.jpg"
+  },
   "resources/css/admin.css": {
     "file": "assets/admin-38a6c143.css",
     "isEntry": true,
     "src": "resources/css/admin.css"
   },
   "resources/css/app.css": {
-    "file": "assets/app-395cc7c9.css",
+    "file": "assets/app-7678acda.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
