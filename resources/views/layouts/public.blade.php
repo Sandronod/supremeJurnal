@@ -52,9 +52,9 @@
                             </button>
                         </form>
                         <div class="flex items-center gap-1 text-sm font-heading">
-                            <a href="{{ route('lang', 'ka') }}" class="px-1 {{ app()->getLocale() === 'ka' ? 'underline' : 'text-white/60' }}">GEO</a>
+                            <a href="{{ $localizedUrls['ka'] }}" class="px-1 {{ app()->getLocale() === 'ka' ? 'underline' : 'text-white/60' }}">GEO</a>
                             /
-                            <a href="{{ route('lang', 'en') }}" class="px-1 {{ app()->getLocale() === 'en' ? 'underline' : 'text-white/60' }}">ENG</a>
+                            <a href="{{ $localizedUrls['en'] }}" class="px-1 {{ app()->getLocale() === 'en' ? 'underline' : 'text-white/60' }}">ENG</a>
                         </div>
                     </div>
                 </div>
@@ -67,8 +67,8 @@
                         @endforeach
                     @endforeach
                     <div class="flex gap-2 pt-2">
-                        <a href="{{ route('lang', 'ka') }}" class="underline">GEO</a>
-                        <a href="{{ route('lang', 'en') }}" class="underline">ENG</a>
+                        <a href="{{ $localizedUrls['ka'] }}" class="underline">GEO</a>
+                        <a href="{{ $localizedUrls['en'] }}" class="underline">ENG</a>
                     </div>
                 </div>
             </div>

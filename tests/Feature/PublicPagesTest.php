@@ -21,22 +21,37 @@ class PublicPagesTest extends TestCase
         $this->seed(\Database\Seeders\SettingSeeder::class);
     }
 
+    public function test_root_redirects_to_default_locale_home(): void
+    {
+        $this->get('/')->assertRedirect('/ka');
+    }
+
     public function test_homepage_shows_about_page(): void
     {
-        $this->get('/')->assertOk()->assertSee(Page::where('slug', 'about')->first()->title_ka);
+        $this->get('/ka')->assertOk()->assertSee(Page::where('slug', 'about')->first()->title_ka);
     }
 
     public function test_static_pages_return_200(): void
     {
-        $this->get('/about/aims-scope')->assertOk();
-        $this->get('/about/review-ethics')->assertOk();
-        $this->get('/editorial-board')->assertOk();
-        $this->get('/for-authors')->assertOk();
+        $this->get('/ka/about/aims-scope')->assertOk();
+        $this->get('/ka/about/review-ethics')->assertOk();
+        $this->get('/ka/editorial-board')->assertOk();
+        $this->get('/ka/for-authors')->assertOk();
+    }
+
+    public function test_english_locale_segment_shows_english_content(): void
+    {
+        $this->get('/en')->assertOk()->assertSee(Page::where('slug', 'about')->first()->title_en);
+    }
+
+    public function test_invalid_locale_segment_is_not_found(): void
+    {
+        $this->get('/fr')->assertNotFound();
     }
 
     public function test_contact_page_returns_200(): void
     {
-        $this->get('/contact')->assertOk();
+        $this->get('/ka/contact')->assertOk();
     }
 
     public function test_archive_returns_200_and_is_sorted_desc(): void
@@ -45,7 +60,7 @@ class PublicPagesTest extends TestCase
         Issue::create(['year' => 2026, 'number' => '1']);
         Issue::create(['year' => 2025, 'number' => '1']);
 
-        $response = $this->get('/issues');
+        $response = $this->get('/ka/issues');
 
         $response->assertOk();
         $years = Issue::orderByDesc('year')->pluck('year')->all();
@@ -63,12 +78,12 @@ class PublicPagesTest extends TestCase
             'slug' => 'test-article',
         ]);
 
-        $this->get('/issues/current')->assertOk()->assertSee('ტესტ', false);
+        $this->get('/ka/issues/current')->assertOk()->assertSee('ტესტ', false);
     }
 
     public function test_current_issue_missing_returns_404(): void
     {
-        $this->get('/issues/current')->assertNotFound();
+        $this->get('/ka/issues/current')->assertNotFound();
     }
 
     public function test_article_show_page(): void
@@ -83,7 +98,7 @@ class PublicPagesTest extends TestCase
             'slug' => 'test-article',
         ]);
 
-        $this->get('/articles/test-article')->assertOk();
+        $this->get('/ka/articles/test-article')->assertOk();
     }
 
     public function test_search_returns_matching_articles(): void
@@ -104,17 +119,15 @@ class PublicPagesTest extends TestCase
             'slug' => 'other-title',
         ]);
 
-        $response = $this->get('/search?q=Findable');
+        $response = $this->get('/ka/search?q=Findable');
 
         $response->assertOk()->assertSee('ძებნადი', false)->assertDontSee('სხვა', false);
     }
 
-    public function test_locale_switch_persists_in_session(): void
+    public function test_language_switcher_links_to_same_page_in_other_locale(): void
     {
-        $this->get('/locale/en')->assertRedirect();
-        $this->assertSame('en', session('locale'));
+        $response = $this->get('/ka/for-authors');
 
-        $this->get('/locale/ka')->assertRedirect();
-        $this->assertSame('ka', session('locale'));
+        $response->assertOk()->assertSee('href="'.route('for-authors', ['locale' => 'en']).'"', false);
     }
 }

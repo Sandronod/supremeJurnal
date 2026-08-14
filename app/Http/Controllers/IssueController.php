@@ -7,21 +7,21 @@ use Illuminate\View\View;
 
 class IssueController extends Controller
 {
-    public function current(): View
+    public function current(string $locale): View
     {
         $issue = Issue::with('articles')->where('is_current', true)->firstOrFail();
 
         return view('issues.show', ['issue' => $issue, 'isCurrent' => true]);
     }
 
-    public function archive(): View
+    public function archive(string $locale): View
     {
         $issues = Issue::orderByDesc('year')->orderByDesc('number')->get();
 
         return view('issues.archive', ['issues' => $issues]);
     }
 
-    public function show(Issue $issue): View
+    public function show(string $locale, Issue $issue): View
     {
         $issue->load('articles');
 

@@ -22,7 +22,7 @@ class MenuItemTest extends TestCase
 
     public function test_homepage_renders_seeded_menu_with_submenu(): void
     {
-        $response = $this->get('/');
+        $response = $this->get('/ka');
 
         $response->assertOk()
             ->assertSee('სარედაქციო კოლეგია', false)

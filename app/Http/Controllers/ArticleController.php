@@ -7,7 +7,7 @@ use Illuminate\View\View;
 
 class ArticleController extends Controller
 {
-    public function show(Article $article): View
+    public function show(string $locale, Article $article): View
     {
         $article->load('issue');
 

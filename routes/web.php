@@ -9,7 +9,6 @@ use App\Http\Controllers\Admin\SettingController as AdminSettingController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\IssueController;
-use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
@@ -24,41 +23,53 @@ Route::prefix(config('app.route_prefix'))->group(function () {
 
     /*
     |----------------------------------------------------------------------
-    | Public routes
+    | Public routes — locale is part of the URL (e.g. /ka/contact,
+    | /en/contact) so pages are shareable/bookmarkable in a specific
+    | language rather than depending on a session cookie.
     |----------------------------------------------------------------------
     */
 
-    Route::get('/', [PageController::class, 'home'])->name('home');
+    // No locale segment yet: send the visitor to their session/browser
+    // default locale so "/" (or "/journal") always resolves to a real page.
+    Route::get('/', function () {
+        $locale = session('locale', config('app.locale'));
 
-    Route::get('/about/{slug}', [PageController::class, 'show'])
-        ->whereIn('slug', ['aims-scope', 'review-ethics'])
-        ->name('about.show');
+        if (! in_array($locale, ['ka', 'en'], true)) {
+            $locale = config('app.locale');
+        }
 
-    Route::get('/editorial-board', [PageController::class, 'show'])
-        ->defaults('slug', 'editorial-board')
-        ->name('editorial-board');
+        return redirect()->route('home', ['locale' => $locale]);
+    });
 
-    Route::get('/for-authors', [PageController::class, 'show'])
-        ->defaults('slug', 'for-authors')
-        ->name('for-authors');
+    Route::prefix('{locale}')->where(['locale' => 'ka|en'])->group(function () {
+        Route::get('/', [PageController::class, 'home'])->name('home');
 
-    Route::get('/issues/current', [IssueController::class, 'current'])->name('issues.current');
-    Route::get('/issues', [IssueController::class, 'archive'])->name('issues.archive');
-    Route::get('/issues/{issue}', [IssueController::class, 'show'])->name('issues.show');
+        Route::get('/about/{slug}', [PageController::class, 'show'])
+            ->whereIn('slug', ['aims-scope', 'review-ethics'])
+            ->name('about.show');
 
-    Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('articles.show');
+        Route::get('/editorial-board', [PageController::class, 'show'])
+            ->defaults('slug', 'editorial-board')
+            ->name('editorial-board');
 
-    Route::get('/contact', [ContactController::class, 'show'])->name('contact');
-    Route::get('/search', SearchController::class)->name('search');
+        Route::get('/for-authors', [PageController::class, 'show'])
+            ->defaults('slug', 'for-authors')
+            ->name('for-authors');
 
-    // Path avoids the literal segment "lang" — it collides with Laravel's own
-    // lang/ translation directory (e.g. lang/en/), which on some Apache/.htaccess
-    // subfolder setups gets resolved as a real directory before routing kicks in.
-    Route::get('/locale/{locale}', LocaleController::class)->name('lang');
+        Route::get('/issues/current', [IssueController::class, 'current'])->name('issues.current');
+        Route::get('/issues', [IssueController::class, 'archive'])->name('issues.archive');
+        Route::get('/issues/{issue}', [IssueController::class, 'show'])->name('issues.show');
+
+        Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('articles.show');
+
+        Route::get('/contact', [ContactController::class, 'show'])->name('contact');
+        Route::get('/search', SearchController::class)->name('search');
+    });
 
     /*
     |----------------------------------------------------------------------
-    | Admin routes
+    | Admin routes — no locale segment; the admin UI's own language follows
+    | the session (set implicitly whenever an admin visits the public site).
     |----------------------------------------------------------------------
     */
 
