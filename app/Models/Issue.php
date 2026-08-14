@@ -14,7 +14,6 @@ class Issue extends Model
     protected $fillable = [
         'year',
         'number',
-        'pdf_path',
         'cover_image_path',
         'description_ka',
         'description_en',
@@ -30,6 +29,11 @@ class Issue extends Model
     public function articles(): HasMany
     {
         return $this->hasMany(Article::class)->orderBy('sort_order');
+    }
+
+    public function files(): HasMany
+    {
+        return $this->hasMany(IssueFile::class)->orderBy('sort_order');
     }
 
     public function getLabelAttribute(): string

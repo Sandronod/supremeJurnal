@@ -15,6 +15,7 @@
                         <span class="ml-2 text-xs uppercase font-heading bg-brand-500 text-white px-2 py-0.5 rounded-sm">{{ __('Current') }}</span>
                     @endif
                     <span class="ml-2 text-sm text-brand-900/50">{{ $issue->articles_count }} {{ __('Articles') }}</span>
+                    <span class="ml-2 text-sm text-brand-900/50">{{ $issue->files_count }} {{ __('Files') }}</span>
                 </div>
                 <div class="flex items-center gap-3 text-sm">
                     @unless($issue->is_current)
@@ -23,6 +24,7 @@
                             <button type="submit" class="text-brand-600 hover:underline">{{ __('Set as current') }}</button>
                         </form>
                     @endunless
+                    <a href="{{ route('admin.issues.files.index', $issue) }}" class="text-brand-600 hover:underline">{{ __('Files') }}</a>
                     <a href="{{ route('admin.issues.edit', $issue) }}" class="text-brand-600 hover:underline">{{ __('Edit') }}</a>
                     <form method="POST" action="{{ route('admin.issues.destroy', $issue) }}" onsubmit="return confirm('{{ __('Delete') }}?')">
                         @csrf

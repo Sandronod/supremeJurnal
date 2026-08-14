@@ -54,5 +54,8 @@
     "Parent item": "მშობელი პუნქტი",
     "Top-level (no parent)": "მთავარი დონე (მშობლის გარეშე)",
     "View in full": "იხილეთ სრულად",
-    "Publication date:": "გამოქვეყნების თარიღი:"
+    "Publication date:": "გამოქვეყნების თარიღი:",
+    "Files": "ფაილები",
+    "Manage files": "ფაილების მართვა",
+    "PDF files are added on the next screen, after the issue is created.": "PDF ფაილების ატვირთვა შესაძლებელი იქნება ნომრის შექმნის შემდეგ, შემდეგ გვერდზე."
 }

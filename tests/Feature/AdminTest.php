@@ -57,7 +57,7 @@ class AdminTest extends TestCase
         $this->assertSame('New Title', $page->fresh()->title_en);
     }
 
-    public function test_admin_can_create_issue_with_pdf_and_set_it_current(): void
+    public function test_admin_can_create_issue_and_set_it_current(): void
     {
         $user = User::factory()->create();
 
@@ -65,13 +65,10 @@ class AdminTest extends TestCase
             'year' => 2026,
             'number' => '1',
             'is_current' => '1',
-            'pdf' => UploadedFile::fake()->create('issue.pdf', 100, 'application/pdf'),
-        ])->assertRedirect(route('admin.issues.index'));
+        ])->assertRedirect();
 
         $issue = Issue::firstOrFail();
         $this->assertTrue($issue->is_current);
-        $this->assertNotNull($issue->pdf_path);
-        Storage::disk('public')->assertExists($issue->pdf_path);
 
         $secondIssue = Issue::create(['year' => 2025, 'number' => '1']);
         $this->actingAs($user)
@@ -80,6 +77,28 @@ class AdminTest extends TestCase
 
         $this->assertFalse($issue->fresh()->is_current);
         $this->assertTrue($secondIssue->fresh()->is_current);
+    }
+
+    public function test_admin_can_add_and_delete_an_issue_file(): void
+    {
+        $user = User::factory()->create();
+        $issue = Issue::create(['year' => 2026, 'number' => '1']);
+
+        $this->actingAs($user)->post(route('admin.issues.files.store', $issue), [
+            'label_ka' => 'ნომერი 1',
+            'label_en' => 'Issue 1',
+            'file' => UploadedFile::fake()->create('issue.pdf', 100, 'application/pdf'),
+        ])->assertRedirect(route('admin.issues.files.index', $issue));
+
+        $file = $issue->files()->firstOrFail();
+        $this->assertSame('Issue 1', $file->label_en);
+        Storage::disk('public')->assertExists($file->file_path);
+
+        $this->actingAs($user)
+            ->delete(route('admin.issues.files.destroy', [$issue, $file]))
+            ->assertRedirect(route('admin.issues.files.index', $issue));
+
+        $this->assertDatabaseMissing('issue_files', ['id' => $file->id]);
     }
 
     public function test_admin_can_create_and_delete_an_article(): void

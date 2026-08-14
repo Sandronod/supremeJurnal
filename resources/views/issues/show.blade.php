@@ -25,12 +25,16 @@
             </div>
         @endif
 
-        @if($issue->pdf_path)
-            <a href="{{ asset('storage/'.$issue->pdf_path) }}" target="_blank" rel="noopener"
-               class="flex items-center gap-2 text-brand-600 hover:underline mb-10">
-                <span aria-hidden="true">&#128196;</span>
-                {{ $issue->title }} #{{ $issue->number }}
-            </a>
+        @if($issue->files->isNotEmpty())
+            <div class="flex flex-col gap-2 mb-10">
+                @foreach($issue->files as $file)
+                    <a href="{{ asset('storage/'.$file->file_path) }}" target="_blank" rel="noopener"
+                       class="flex items-center gap-2 text-brand-600 hover:underline">
+                        <span aria-hidden="true">&#128196;</span>
+                        {{ $file->label }}
+                    </a>
+                @endforeach
+            </div>
         @endif
 
         <h2 class="text-lg text-brand-purple mb-4">{{ __('Articles in this issue') }}</h2>

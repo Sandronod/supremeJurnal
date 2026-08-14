@@ -9,7 +9,7 @@ class IssueController extends Controller
 {
     public function current(string $locale): View
     {
-        $issue = Issue::with('articles')->where('is_current', true)->firstOrFail();
+        $issue = Issue::with(['articles', 'files'])->where('is_current', true)->firstOrFail();
 
         return view('issues.show', ['issue' => $issue, 'isCurrent' => true]);
     }
@@ -23,7 +23,7 @@ class IssueController extends Controller
 
     public function show(string $locale, Issue $issue): View
     {
-        $issue->load('articles');
+        $issue->load(['articles', 'files']);
 
         return view('issues.show', ['issue' => $issue, 'isCurrent' => $issue->is_current]);
     }

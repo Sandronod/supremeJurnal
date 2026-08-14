@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\IssueController as AdminIssueController;
+use App\Http\Controllers\Admin\IssueFileController as AdminIssueFileController;
 use App\Http\Controllers\Admin\MenuItemController as AdminMenuItemController;
 use App\Http\Controllers\Admin\PageController as AdminPageController;
 use App\Http\Controllers\Admin\SettingController as AdminSettingController;
@@ -95,6 +96,9 @@ Route::prefix(config('app.route_prefix'))->group(function () {
         Route::resource('menu-items', AdminMenuItemController::class)->except(['show']);
 
         Route::post('/issues/{issue}/set-current', [AdminIssueController::class, 'setCurrent'])->name('issues.set-current');
+        Route::get('/issues/{issue}/files', [AdminIssueFileController::class, 'index'])->name('issues.files.index');
+        Route::post('/issues/{issue}/files', [AdminIssueFileController::class, 'store'])->name('issues.files.store');
+        Route::delete('/issues/{issue}/files/{file}', [AdminIssueFileController::class, 'destroy'])->name('issues.files.destroy');
         Route::resource('issues', AdminIssueController::class)->except(['show']);
 
         Route::resource('articles', AdminArticleController::class)->except(['show']);

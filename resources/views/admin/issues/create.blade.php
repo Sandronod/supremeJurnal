@@ -47,12 +47,6 @@
         </div>
 
         <div>
-            <label for="pdf" class="block text-sm text-brand-900/70 mb-1">{{ __('Issue PDF') }}</label>
-            <input id="pdf" type="file" name="pdf" accept="application/pdf"
-                   class="block w-full text-sm">
-        </div>
-
-        <div>
             <label for="cover_image" class="block text-sm text-brand-900/70 mb-1">{{ __('Cover image') }}</label>
             <input id="cover_image" type="file" name="cover_image" accept="image/png,image/jpeg,image/webp"
                    class="block w-full text-sm">
@@ -67,5 +61,6 @@
         <button type="submit" class="bg-brand-500 hover:bg-brand-600 text-white px-4 py-2 rounded-sm text-sm">
             {{ __('Save') }}
         </button>
+        <p class="text-sm text-brand-900/50">{{ __('PDF files are added on the next screen, after the issue is created.') }}</p>
     </form>
 @endsection

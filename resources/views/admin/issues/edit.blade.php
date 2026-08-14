@@ -48,14 +48,9 @@
         </div>
 
         <div>
-            <label for="pdf" class="block text-sm text-brand-900/70 mb-1">{{ __('Issue PDF') }}</label>
-            @if($issue->pdf_path)
-                <p class="text-sm text-brand-900/60 mb-1">
-                    <a href="{{ asset('storage/'.$issue->pdf_path) }}" target="_blank" class="text-brand-600 hover:underline">{{ __('Download PDF') }}</a>
-                </p>
-            @endif
-            <input id="pdf" type="file" name="pdf" accept="application/pdf"
-                   class="block w-full text-sm">
+            <a href="{{ route('admin.issues.files.index', $issue) }}" class="inline-block text-sm text-brand-600 hover:underline">
+                {{ __('Manage files') }} ({{ $issue->files_count ?? $issue->files()->count() }})
+            </a>
         </div>
 
         <div>
