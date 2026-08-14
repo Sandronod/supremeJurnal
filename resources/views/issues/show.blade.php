@@ -21,7 +21,7 @@
 
         @if($issue->description)
             <div class="prose max-w-none text-brand-900/90 leading-relaxed mb-10">
-                {!! nl2br(e($issue->description)) !!}
+                {!! $issue->description !!}
             </div>
         @endif
 

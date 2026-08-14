@@ -35,14 +35,14 @@
 
         <div class="grid grid-cols-2 gap-4">
             <div>
-                <label for="description_ka" class="block text-sm text-brand-900/70 mb-1">{{ __('Georgian text') }}</label>
-                <textarea id="description_ka" name="description_ka" rows="4"
-                          class="block w-full rounded-sm border-brand-900/20 focus:border-brand-500 focus:ring-brand-500">{{ old('description_ka') }}</textarea>
+                <label class="block text-sm text-brand-900/70 mb-1">{{ __('Georgian text') }}</label>
+                <input id="description_ka_input" type="hidden" name="description_ka" value="{{ old('description_ka') }}">
+                <trix-editor input="description_ka_input" class="trix-content bg-white"></trix-editor>
             </div>
             <div>
-                <label for="description_en" class="block text-sm text-brand-900/70 mb-1">{{ __('English text') }}</label>
-                <textarea id="description_en" name="description_en" rows="4"
-                          class="block w-full rounded-sm border-brand-900/20 focus:border-brand-500 focus:ring-brand-500">{{ old('description_en') }}</textarea>
+                <label class="block text-sm text-brand-900/70 mb-1">{{ __('English text') }}</label>
+                <input id="description_en_input" type="hidden" name="description_en" value="{{ old('description_en') }}">
+                <trix-editor input="description_en_input" class="trix-content bg-white"></trix-editor>
             </div>
         </div>
 

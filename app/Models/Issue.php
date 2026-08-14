@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\Html;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -38,7 +39,7 @@ class Issue extends Model
 
     public function getDescriptionAttribute(): ?string
     {
-        return app()->getLocale() === 'ka' ? $this->description_ka : $this->description_en;
+        return Html::externalLinksBlank(app()->getLocale() === 'ka' ? $this->description_ka : $this->description_en);
     }
 
     /**

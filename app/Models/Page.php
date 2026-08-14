@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\Html;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,7 +25,7 @@ class Page extends Model
 
     public function getBodyAttribute(): ?string
     {
-        return app()->getLocale() === 'ka' ? $this->body_ka : $this->body_en;
+        return Html::externalLinksBlank(app()->getLocale() === 'ka' ? $this->body_ka : $this->body_en);
     }
 
     /**
