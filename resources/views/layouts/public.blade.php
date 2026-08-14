@@ -9,7 +9,7 @@
 </head>
 <body class="bg-brand-bg text-brand-900 font-sans antialiased flex min-h-screen flex-col">
 
-    <header class="bg-brand-900 text-white">
+    <header class="texture-header text-white">
         <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
             <a href="{{ route('home') }}" class="font-heading text-xl md:text-2xl tracking-wide">
                 {{ $siteSetting?->site_name ?? config('app.name') }}
@@ -79,12 +79,12 @@
         @yield('content')
     </main>
 
-    <footer class="bg-white border-t border-brand-900/10 mt-auto">
-        <div class="max-w-6xl mx-auto px-4 py-8 text-sm text-brand-900/70 flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+    <footer class="texture-footer mt-auto">
+        <div class="max-w-6xl mx-auto px-4 py-8 text-sm text-white/90 flex flex-col md:flex-row md:items-center md:justify-between gap-2">
             <p>{{ $siteSetting?->copyright_text ?? '' }}</p>
             <div class="flex gap-4">
                 @if($siteSetting?->email)
-                    <a href="mailto:{{ $siteSetting->email }}" class="hover:text-brand-600">{{ $siteSetting->email }}</a>
+                    <a href="mailto:{{ $siteSetting->email }}" class="hover:text-white">{{ $siteSetting->email }}</a>
                 @endif
                 @if($siteSetting?->phone)
                     <span>{{ $siteSetting->phone }}</span>
