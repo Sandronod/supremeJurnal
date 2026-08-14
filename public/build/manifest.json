@@ -3,13 +3,17 @@
     "file": "assets/cover2-12a06332.jpg",
     "src": "public/imgs/cover2.jpg"
   },
+  "public/imgs/slide2.jpg": {
+    "file": "assets/slide2-d45a2dc3.jpg",
+    "src": "public/imgs/slide2.jpg"
+  },
   "resources/css/admin.css": {
     "file": "assets/admin-38a6c143.css",
     "isEntry": true,
     "src": "resources/css/admin.css"
   },
   "resources/css/app.css": {
-    "file": "assets/app-9c59b5e9.css",
+    "file": "assets/app-82dd9b2f.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },

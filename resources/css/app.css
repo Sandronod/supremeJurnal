@@ -62,3 +62,18 @@
     background-size: cover;
     background-position: center;
 }
+
+/* Page background — the court building photo, tinted with the light brand
+   background color so it reads as a subtle backdrop behind the (opaque)
+   content cards rather than competing with them. Fixed attachment gives a
+   gentle parallax feel while scrolling. */
+.body-texture {
+    background-color: #edf2fb;
+    background-image:
+        linear-gradient(rgba(237, 242, 251, 0.88), rgba(237, 242, 251, 0.88)),
+        url('../../public/imgs/slide2.jpg');
+    background-size: cover;
+    background-position: top center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
