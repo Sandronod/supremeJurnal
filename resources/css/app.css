@@ -62,11 +62,3 @@
     background-size: cover;
     background-position: center;
 }
-
-/* Small square accents, echoing the reference cover design. */
-.texture-square {
-    position: absolute;
-    width: 1.75rem;
-    height: 1.75rem;
-    background: rgba(255, 255, 255, 0.18);
-}
