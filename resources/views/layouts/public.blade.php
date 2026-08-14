@@ -10,6 +10,9 @@
 <body class="bg-brand-bg text-brand-900 font-sans antialiased flex min-h-screen flex-col">
 
     <header class="texture-header text-white">
+        <span class="texture-square hidden sm:block" style="top: 0.75rem; right: 18%;" aria-hidden="true"></span>
+        <span class="texture-square hidden sm:block" style="bottom: 0.5rem; left: 8%; width: 1rem; height: 1rem;" aria-hidden="true"></span>
+
         <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
             <a href="{{ route('home') }}" class="font-heading text-xl md:text-2xl tracking-wide">
                 {{ $siteSetting?->site_name ?? config('app.name') }}
@@ -80,6 +83,9 @@
     </main>
 
     <footer class="texture-footer mt-auto">
+        <span class="texture-square hidden sm:block" style="top: 0.75rem; left: 12%;" aria-hidden="true"></span>
+        <span class="texture-square hidden sm:block" style="bottom: 0.75rem; right: 15%; width: 1.25rem; height: 1.25rem;" aria-hidden="true"></span>
+
         <div class="max-w-6xl mx-auto px-4 py-8 text-sm text-white/90 flex flex-col md:flex-row md:items-center md:justify-between gap-2">
             <p>{{ $siteSetting?->copyright_text ?? '' }}</p>
             <div class="flex gap-4">

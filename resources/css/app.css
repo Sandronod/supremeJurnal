@@ -41,21 +41,31 @@
 
 /* Textured purple header/footer — dotted pattern over a soft tonal gradient. */
 .texture-header {
+    position: relative;
     background-color: #2c1a3d;
     background-image:
-        radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.10) 0, rgba(255, 255, 255, 0.10) 2px, transparent 2px),
-        radial-gradient(circle at 55% 65%, rgba(255, 255, 255, 0.08) 0, rgba(255, 255, 255, 0.08) 2px, transparent 2px),
-        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.10) 0, rgba(255, 255, 255, 0.10) 2px, transparent 2px),
+        radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.12) 0, rgba(255, 255, 255, 0.12) 4px, transparent 4px),
+        radial-gradient(circle at 55% 65%, rgba(255, 255, 255, 0.10) 0, rgba(255, 255, 255, 0.10) 5px, transparent 5px),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.12) 0, rgba(255, 255, 255, 0.12) 4px, transparent 4px),
         linear-gradient(135deg, #241531 0%, #3a2350 35%, #2c1a3d 70%, #422a5c 100%);
-    background-size: 40px 40px, 55px 55px, 35px 35px, cover;
+    background-size: 60px 60px, 80px 80px, 50px 50px, cover;
 }
 
 .texture-footer {
+    position: relative;
     background-color: #6b4a83;
     background-image:
-        radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.16) 0, rgba(255, 255, 255, 0.16) 2px, transparent 2px),
-        radial-gradient(circle at 60% 70%, rgba(255, 255, 255, 0.12) 0, rgba(255, 255, 255, 0.12) 2px, transparent 2px),
-        radial-gradient(circle at 85% 15%, rgba(255, 255, 255, 0.14) 0, rgba(255, 255, 255, 0.14) 2px, transparent 2px),
+        radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.18) 0, rgba(255, 255, 255, 0.18) 4px, transparent 4px),
+        radial-gradient(circle at 60% 70%, rgba(255, 255, 255, 0.14) 0, rgba(255, 255, 255, 0.14) 5px, transparent 5px),
+        radial-gradient(circle at 85% 15%, rgba(255, 255, 255, 0.16) 0, rgba(255, 255, 255, 0.16) 4px, transparent 4px),
         linear-gradient(135deg, #5c3d73 0%, #7a5794 35%, #6b4a83 70%, #8863a3 100%);
-    background-size: 38px 38px, 50px 50px, 32px 32px, cover;
+    background-size: 55px 55px, 72px 72px, 46px 46px, cover;
+}
+
+/* Small square accents, echoing the reference cover design. */
+.texture-square {
+    position: absolute;
+    width: 1.75rem;
+    height: 1.75rem;
+    background: rgba(255, 255, 255, 0.18);
 }
