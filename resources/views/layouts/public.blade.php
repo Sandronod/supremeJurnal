@@ -13,8 +13,8 @@
         <span class="texture-square hidden sm:block" style="top: 0.75rem; right: 18%;" aria-hidden="true"></span>
         <span class="texture-square hidden sm:block" style="bottom: 0.5rem; left: 8%; width: 1rem; height: 1rem;" aria-hidden="true"></span>
 
-        <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-            <a href="{{ route('home') }}" class="font-heading text-xl md:text-2xl tracking-wide">
+        <div class="max-w-6xl mx-auto px-4 py-8 md:py-10 flex items-center justify-between">
+            <a href="{{ route('home') }}" class="font-heading text-2xl md:text-3xl tracking-wide">
                 {{ $siteSetting?->site_name ?? config('app.name') }}
             </a>
             @if($siteSetting?->issn)
@@ -24,7 +24,7 @@
 
         <nav class="border-t border-white/10" x-data="{ mobileOpen: false }">
             <div class="max-w-6xl mx-auto px-4">
-                <div class="flex items-center justify-between py-2">
+                <div class="flex items-center justify-between py-3">
                     <button class="md:hidden text-white" @click="mobileOpen = !mobileOpen" aria-label="Menu">
                         &#9776;
                     </button>
