@@ -30,6 +30,12 @@ class IssueController extends Controller
             $data['pdf_path'] = $request->file('pdf')->store('issues', 'public');
         }
 
+        if ($request->hasFile('cover_image')) {
+            $data['cover_image_path'] = $request->file('cover_image')->store('issues/covers', 'public');
+        }
+
+        unset($data['cover_image']);
+
         if (! empty($data['is_current'])) {
             Issue::where('is_current', true)->update(['is_current' => false]);
         }
@@ -51,6 +57,12 @@ class IssueController extends Controller
         if ($request->hasFile('pdf')) {
             $data['pdf_path'] = $request->file('pdf')->store('issues', 'public');
         }
+
+        if ($request->hasFile('cover_image')) {
+            $data['cover_image_path'] = $request->file('cover_image')->store('issues/covers', 'public');
+        }
+
+        unset($data['cover_image']);
 
         if (! empty($data['is_current'])) {
             Issue::where('is_current', true)->where('id', '!=', $issue->id)->update(['is_current' => false]);
@@ -81,9 +93,12 @@ class IssueController extends Controller
         $data = $request->validate([
             'year' => ['required', 'integer', 'min:1900', 'max:2100'],
             'number' => ['required', 'string', 'max:50'],
+            'description_ka' => ['nullable', 'string'],
+            'description_en' => ['nullable', 'string'],
             'published_at' => ['nullable', 'date'],
             'is_current' => ['nullable', 'boolean'],
             'pdf' => ['nullable', 'file', 'mimes:pdf', 'max:20480'],
+            'cover_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
         ]);
 
         $data['is_current'] = $request->boolean('is_current');

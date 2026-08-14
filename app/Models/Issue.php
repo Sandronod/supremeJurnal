@@ -14,6 +14,9 @@ class Issue extends Model
         'year',
         'number',
         'pdf_path',
+        'cover_image_path',
+        'description_ka',
+        'description_en',
         'published_at',
         'is_current',
     ];
@@ -31,5 +34,23 @@ class Issue extends Model
     public function getLabelAttribute(): string
     {
         return "{$this->year}, #{$this->number}";
+    }
+
+    public function getDescriptionAttribute(): ?string
+    {
+        return app()->getLocale() === 'ka' ? $this->description_ka : $this->description_en;
+    }
+
+    /**
+     * "Journal '<site name>' <year>" — the archive-card / detail-page title,
+     * generated from the site name rather than stored per issue.
+     */
+    public function getTitleAttribute(): string
+    {
+        $siteName = Setting::query()->first()?->site_name ?? config('app.name');
+
+        return app()->getLocale() === 'ka'
+            ? "ჟურნალი \"{$siteName}\" {$this->year}"
+            : "Journal \"{$siteName}\" {$this->year}";
     }
 }

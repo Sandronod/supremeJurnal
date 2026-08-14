@@ -77,3 +77,14 @@
     background-attachment: fixed;
     background-repeat: no-repeat;
 }
+
+/* Issue archive-card cover — falls back to the purple texture (via inline
+   background-image override) when no per-issue cover image is uploaded. */
+.issue-card-cover {
+    background-color: #3a2350;
+    background-image:
+        linear-gradient(135deg, rgba(20, 10, 32, 0.35), rgba(60, 35, 80, 0.35)),
+        url('../../public/imgs/cover2.jpg');
+    background-size: cover;
+    background-position: center;
+}

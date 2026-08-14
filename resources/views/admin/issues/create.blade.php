@@ -33,9 +33,28 @@
                    class="block w-full rounded-sm border-brand-900/20 focus:border-brand-500 focus:ring-brand-500">
         </div>
 
+        <div class="grid grid-cols-2 gap-4">
+            <div>
+                <label for="description_ka" class="block text-sm text-brand-900/70 mb-1">{{ __('Georgian text') }}</label>
+                <textarea id="description_ka" name="description_ka" rows="4"
+                          class="block w-full rounded-sm border-brand-900/20 focus:border-brand-500 focus:ring-brand-500">{{ old('description_ka') }}</textarea>
+            </div>
+            <div>
+                <label for="description_en" class="block text-sm text-brand-900/70 mb-1">{{ __('English text') }}</label>
+                <textarea id="description_en" name="description_en" rows="4"
+                          class="block w-full rounded-sm border-brand-900/20 focus:border-brand-500 focus:ring-brand-500">{{ old('description_en') }}</textarea>
+            </div>
+        </div>
+
         <div>
             <label for="pdf" class="block text-sm text-brand-900/70 mb-1">{{ __('Issue PDF') }}</label>
             <input id="pdf" type="file" name="pdf" accept="application/pdf"
+                   class="block w-full text-sm">
+        </div>
+
+        <div>
+            <label for="cover_image" class="block text-sm text-brand-900/70 mb-1">{{ __('Cover image') }}</label>
+            <input id="cover_image" type="file" name="cover_image" accept="image/png,image/jpeg,image/webp"
                    class="block w-full text-sm">
         </div>
 

@@ -3,22 +3,35 @@
 @section('title', $issue->label)
 
 @section('content')
-    <div class="bg-white rounded-sm shadow-sm p-6 md:p-10">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
-            <div>
-                @if($isCurrent)
-                    <span class="inline-block text-xs uppercase font-heading bg-brand-500 text-white px-2 py-1 mb-2">{{ __('Current') }}</span>
-                @endif
-                <h1 class="text-2xl md:text-3xl text-brand-purple">{{ $issue->label }}</h1>
-            </div>
+    <div class="relative h-64 md:h-80 rounded-sm overflow-hidden issue-card-cover mb-[-1px]"
+         @if($issue->cover_image_path) style="background-image: url('{{ asset('storage/'.$issue->cover_image_path) }}');" @endif>
+        @if($isCurrent)
+            <span class="absolute top-4 left-4 text-xs uppercase font-heading bg-brand-500 text-white px-2 py-1">{{ __('Current') }}</span>
+        @endif
+    </div>
 
-            @if($issue->pdf_path)
-                <a href="{{ asset('storage/'.$issue->pdf_path) }}" target="_blank" rel="noopener"
-                   class="inline-block bg-brand-500 hover:bg-brand-600 text-white text-sm px-4 py-2 rounded-sm shrink-0">
-                    {{ __('Download full issue (PDF)') }}
-                </a>
-            @endif
-        </div>
+    <div class="bg-white rounded-sm shadow-sm p-6 md:p-10">
+        <h1 class="text-2xl md:text-3xl text-brand-purple text-center mb-4">{{ $issue->title }}</h1>
+
+        @if($issue->published_at)
+            <p class="text-center text-sm text-brand-900/60 mb-8">
+                {{ __('Publication date:') }} {{ $issue->published_at->format('d.m.Y') }}
+            </p>
+        @endif
+
+        @if($issue->description)
+            <div class="prose max-w-none text-brand-900/90 leading-relaxed mb-10">
+                {!! nl2br(e($issue->description)) !!}
+            </div>
+        @endif
+
+        @if($issue->pdf_path)
+            <a href="{{ asset('storage/'.$issue->pdf_path) }}" target="_blank" rel="noopener"
+               class="flex items-center gap-2 text-brand-600 hover:underline mb-10">
+                <span aria-hidden="true">&#128196;</span>
+                {{ $issue->title }} #{{ $issue->number }}
+            </a>
+        @endif
 
         <h2 class="text-lg text-brand-purple mb-4">{{ __('Articles in this issue') }}</h2>
 
