@@ -64,6 +64,10 @@ Route::prefix(config('app.route_prefix'))->group(function () {
 
         Route::get('/contact', [ContactController::class, 'show'])->name('contact');
         Route::get('/search', SearchController::class)->name('search');
+
+        // Generic route for admin-created pages beyond the 5 fixed ones
+        // (which each keep their own dedicated, more readable route above).
+        Route::get('/page/{slug}', [PageController::class, 'show'])->name('page.show');
     });
 
     /*
@@ -79,8 +83,11 @@ Route::prefix(config('app.route_prefix'))->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
         Route::get('/pages', [AdminPageController::class, 'index'])->name('pages.index');
+        Route::get('/pages/create', [AdminPageController::class, 'create'])->name('pages.create');
+        Route::post('/pages', [AdminPageController::class, 'store'])->name('pages.store');
         Route::get('/pages/{page}/edit', [AdminPageController::class, 'edit'])->name('pages.edit');
         Route::put('/pages/{page}', [AdminPageController::class, 'update'])->name('pages.update');
+        Route::delete('/pages/{page}', [AdminPageController::class, 'destroy'])->name('pages.destroy');
 
         Route::get('/settings', [AdminSettingController::class, 'edit'])->name('settings.edit');
         Route::put('/settings', [AdminSettingController::class, 'update'])->name('settings.update');

@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Article;
 use App\Models\Issue;
+use App\Models\MenuItem;
 use App\Models\Page;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -104,5 +105,45 @@ class AdminTest extends TestCase
             ->assertRedirect(route('admin.articles.index'));
 
         $this->assertDatabaseMissing('articles', ['id' => $article->id]);
+    }
+
+    public function test_admin_can_create_a_custom_page_and_it_is_publicly_viewable(): void
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user)->post('/admin/pages', [
+            'title_ka' => 'ინდექსირება',
+            'title_en' => 'Indexing',
+            'body_ka' => '<p>ტექსტი</p>',
+            'body_en' => '<p>Text</p>',
+        ])->assertRedirect(route('admin.pages.index'));
+
+        $page = Page::where('title_en', 'Indexing')->firstOrFail();
+        $this->assertSame('indexing', $page->slug);
+        $this->assertFalse($page->isFixed());
+
+        $this->get('/ka/page/indexing')->assertOk()->assertSee('ინდექსირება', false);
+        $this->assertArrayHasKey('page.indexing', MenuItem::internalTargets());
+    }
+
+    public function test_fixed_page_cannot_be_deleted_but_custom_page_can(): void
+    {
+        $user = User::factory()->create();
+        $fixed = Page::where('slug', 'about')->firstOrFail();
+        $custom = Page::create([
+            'slug' => 'custom-page',
+            'title_ka' => 'ტესტი',
+            'title_en' => 'Test',
+        ]);
+
+        $this->actingAs($user)
+            ->delete(route('admin.pages.destroy', $fixed))
+            ->assertStatus(422);
+        $this->assertDatabaseHas('pages', ['id' => $fixed->id]);
+
+        $this->actingAs($user)
+            ->delete(route('admin.pages.destroy', $custom))
+            ->assertRedirect(route('admin.pages.index'));
+        $this->assertDatabaseMissing('pages', ['id' => $custom->id]);
     }
 }

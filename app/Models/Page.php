@@ -26,4 +26,20 @@ class Page extends Model
     {
         return app()->getLocale() === 'ka' ? $this->body_ka : $this->body_en;
     }
+
+    /**
+     * Slugs seeded by PageSeeder that have their own dedicated public route
+     * (home, about.show, editorial-board, for-authors) — these can be
+     * edited but not deleted, since removing them would break navigation.
+     * Any other page is admin-created and freely deletable.
+     */
+    public static function fixedSlugs(): array
+    {
+        return ['about', 'aims-scope', 'review-ethics', 'editorial-board', 'for-authors'];
+    }
+
+    public function isFixed(): bool
+    {
+        return in_array($this->slug, self::fixedSlugs(), true);
+    }
 }

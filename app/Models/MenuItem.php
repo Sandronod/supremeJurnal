@@ -23,11 +23,13 @@ class MenuItem extends Model
 
     /**
      * Known internal destinations an admin can point a menu item at,
-     * keyed by a stable identifier used only in the admin form.
+     * keyed by a stable identifier used only in the admin form. Includes
+     * the fixed pages/sections plus any admin-created custom pages, so a
+     * newly created page is immediately linkable from the menu builder.
      */
     public static function internalTargets(): array
     {
-        return [
+        $targets = [
             'home' => ['route' => 'home', 'param' => null, 'label_ka' => 'მთავარი', 'label_en' => 'Home'],
             'about.aims-scope' => ['route' => 'about.show', 'param' => 'aims-scope', 'label_ka' => 'მიზნები და ამოცანები', 'label_en' => 'Aims & Scope'],
             'about.review-ethics' => ['route' => 'about.show', 'param' => 'review-ethics', 'label_ka' => 'რეცენზირება და ეთიკა', 'label_en' => 'Review & Ethics'],
@@ -38,6 +40,19 @@ class MenuItem extends Model
             'contact' => ['route' => 'contact', 'param' => null, 'label_ka' => 'კონტაქტი', 'label_en' => 'Contact'],
             'search' => ['route' => 'search', 'param' => null, 'label_ka' => 'ძიება', 'label_en' => 'Search'],
         ];
+
+        $customPages = Page::whereNotIn('slug', Page::fixedSlugs())->orderBy('title_en')->get();
+
+        foreach ($customPages as $page) {
+            $targets['page.'.$page->slug] = [
+                'route' => 'page.show',
+                'param' => $page->slug,
+                'label_ka' => $page->title_ka,
+                'label_en' => $page->title_en,
+            ];
+        }
+
+        return $targets;
     }
 
     public function parent(): BelongsTo
