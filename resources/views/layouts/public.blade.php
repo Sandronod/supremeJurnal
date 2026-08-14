@@ -80,15 +80,35 @@
     </main>
 
     <footer class="texture-footer mt-auto">
-        <div class="max-w-6xl mx-auto px-4 py-8 text-sm text-white/90 flex flex-col md:flex-row md:items-center md:justify-between gap-2">
-            <p>{{ $siteSetting?->copyright_text ?? '' }}</p>
-            <div class="flex gap-4">
-                @if($siteSetting?->email)
-                    <a href="mailto:{{ $siteSetting->email }}" class="hover:text-white">{{ $siteSetting->email }}</a>
-                @endif
-                @if($siteSetting?->phone)
-                    <span>{{ $siteSetting->phone }}</span>
-                @endif
+        <div class="max-w-6xl mx-auto px-4 py-10">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5 mb-8 text-sm">
+                @foreach($menuTree as $item)
+                    <div>
+                        <a href="{{ $item->resolved_url }}" class="font-heading uppercase tracking-wide text-white hover:text-white/80">{{ $item->label }}</a>
+                        @if($item->children->isNotEmpty())
+                            <ul class="mt-2 space-y-1 text-white/70">
+                                @foreach($item->children as $child)
+                                    <li><a href="{{ $child->resolved_url }}" class="hover:text-white">{{ $child->label }}</a></li>
+                                @endforeach
+                            </ul>
+                        @endif
+                    </div>
+                @endforeach
+            </div>
+
+            <div class="border-t border-white/15 pt-6 flex flex-col md:flex-row md:items-center md:justify-between gap-3 text-sm text-white/90">
+                <p>{{ $siteSetting?->copyright_text ?? '' }}</p>
+                <div class="flex flex-col sm:flex-row gap-1 sm:gap-4">
+                    @if($siteSetting?->email)
+                        <a href="mailto:{{ $siteSetting->email }}" class="hover:text-white">{{ $siteSetting->email }}</a>
+                    @endif
+                    @if($siteSetting?->phone)
+                        <span>{{ $siteSetting->phone }}</span>
+                    @endif
+                    @if($siteSetting?->address)
+                        <span>{{ $siteSetting->address }}</span>
+                    @endif
+                </div>
             </div>
         </div>
     </footer>
