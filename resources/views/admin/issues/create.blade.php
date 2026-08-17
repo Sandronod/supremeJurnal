@@ -27,6 +27,19 @@
             </div>
         </div>
 
+        <div class="grid grid-cols-2 gap-4">
+            <div>
+                <label for="title_ka" class="block text-sm text-brand-900/70 mb-1">{{ __('Georgian title') }}</label>
+                <input id="title_ka" type="text" name="title_ka" value="{{ old('title_ka') }}"
+                       class="block w-full rounded-sm border-brand-900/20 focus:border-brand-500 focus:ring-brand-500">
+            </div>
+            <div>
+                <label for="title_en" class="block text-sm text-brand-900/70 mb-1">{{ __('English title') }}</label>
+                <input id="title_en" type="text" name="title_en" value="{{ old('title_en') }}"
+                       class="block w-full rounded-sm border-brand-900/20 focus:border-brand-500 focus:ring-brand-500">
+            </div>
+        </div>
+
         <div>
             <label for="published_at" class="block text-sm text-brand-900/70 mb-1">Published at</label>
             <input id="published_at" type="date" name="published_at" value="{{ old('published_at') }}"

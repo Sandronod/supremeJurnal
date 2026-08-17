@@ -79,6 +79,28 @@ class AdminTest extends TestCase
         $this->assertTrue($secondIssue->fresh()->is_current);
     }
 
+    public function test_admin_can_set_a_custom_issue_title(): void
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user)->post('/admin/issues', [
+            'year' => 2026,
+            'number' => '1',
+            'title_ka' => 'ჩემი ნომრის სახელი',
+            'title_en' => 'My Issue Title',
+        ])->assertRedirect();
+
+        $issue = Issue::firstOrFail();
+        $this->assertSame('ჩემი ნომრის სახელი', $issue->title_ka);
+        $this->assertSame('My Issue Title', $issue->title_en);
+
+        app()->setLocale('ka');
+        $this->assertSame('ჩემი ნომრის სახელი', $issue->fresh()->title);
+
+        app()->setLocale('en');
+        $this->assertSame('My Issue Title', $issue->fresh()->title);
+    }
+
     public function test_admin_can_add_and_delete_an_issue_file(): void
     {
         $user = User::factory()->create();

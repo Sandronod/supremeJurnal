@@ -14,6 +14,8 @@ class Issue extends Model
     protected $fillable = [
         'year',
         'number',
+        'title_ka',
+        'title_en',
         'cover_image_path',
         'description_ka',
         'description_en',
@@ -47,11 +49,17 @@ class Issue extends Model
     }
 
     /**
-     * "Journal '<site name>' <year>" — the archive-card / detail-page title,
-     * generated from the site name rather than stored per issue.
+     * The stored per-issue title, falling back to a generated
+     * "Journal '<site name>' <year>" when no title was set.
      */
     public function getTitleAttribute(): string
     {
+        $stored = app()->getLocale() === 'ka' ? $this->title_ka : $this->title_en;
+
+        if ($stored) {
+            return $stored;
+        }
+
         $siteName = Setting::query()->first()?->site_name ?? config('app.name');
 
         return app()->getLocale() === 'ka'

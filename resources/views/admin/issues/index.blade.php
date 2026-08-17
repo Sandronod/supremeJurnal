@@ -11,6 +11,7 @@
             <div class="flex items-center justify-between px-6 py-4">
                 <div>
                     <span class="font-medium">{{ $issue->label }}</span>
+                    <span class="text-brand-900/50">&mdash; {{ $issue->title }}</span>
                     @if($issue->is_current)
                         <span class="ml-2 text-xs uppercase font-heading bg-brand-500 text-white px-2 py-0.5 rounded-sm">{{ __('Current') }}</span>
                     @endif

@@ -85,6 +85,8 @@ class IssueController extends Controller
         $data = $request->validate([
             'year' => ['required', 'integer', 'min:1900', 'max:2100'],
             'number' => ['required', 'string', 'max:50'],
+            'title_ka' => ['nullable', 'string', 'max:255'],
+            'title_en' => ['nullable', 'string', 'max:255'],
             'description_ka' => ['nullable', 'string'],
             'description_en' => ['nullable', 'string'],
             'published_at' => ['nullable', 'date'],
