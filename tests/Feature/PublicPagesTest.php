@@ -67,6 +67,17 @@ class PublicPagesTest extends TestCase
         $this->assertSame([2026, 2025, 2024], $years);
     }
 
+    public function test_archive_excludes_the_current_issue(): void
+    {
+        $current = Issue::create(['year' => 2026, 'number' => '1', 'is_current' => true, 'title_ka' => 'მიმდინარე ნომრის უნიკალური სახელი']);
+        Issue::create(['year' => 2025, 'number' => '1']);
+
+        $response = $this->get('/ka/issues');
+
+        $response->assertOk();
+        $response->assertDontSee('მიმდინარე ნომრის უნიკალური სახელი');
+    }
+
     public function test_current_issue_page(): void
     {
         $issue = Issue::create(['year' => 2026, 'number' => '1', 'is_current' => true]);

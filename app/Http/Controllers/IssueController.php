@@ -16,7 +16,7 @@ class IssueController extends Controller
 
     public function archive(string $locale): View
     {
-        $issues = Issue::orderByDesc('year')->orderByDesc('number')->get();
+        $issues = Issue::where('is_current', false)->orderByDesc('year')->orderByDesc('number')->get();
 
         return view('issues.archive', ['issues' => $issues]);
     }
