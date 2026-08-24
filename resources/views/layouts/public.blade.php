@@ -11,10 +11,10 @@
 
     <header class="texture-header text-white">
         <div class="max-w-6xl mx-auto px-4 py-8 md:py-10 flex items-center justify-between gap-4">
-            <a href="{{ route('home') }}" class="shrink-0 -translate-y-2">
+            <a href="{{ route('home') }}" class="shrink-0 self-start mt-[10px]">
                 <img src="{{ asset('imgs/geoLogo.jpg') }}" alt="{{ $siteSetting?->site_name_ka }}" class="h-12 md:h-16 w-auto">
             </a>
-            <a href="{{ route('home') }}" class="shrink-0 translate-y-2">
+            <a href="{{ route('home') }}" class="shrink-0 self-end mb-[10px]">
                 <img src="{{ asset('imgs/engLogo.jpg') }}" alt="{{ $siteSetting?->site_name_en }}" class="h-12 md:h-16 w-auto">
             </a>
         </div>
