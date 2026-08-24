@@ -14,7 +14,7 @@ class PageController extends Controller
     {
         $page = Page::where('slug', 'about')->firstOrFail();
 
-        return view('pages.show', ['page' => $page]);
+        return view('pages.show', ['page' => $page, 'isHome' => true]);
     }
 
     public function show(string $locale, string $slug): View
