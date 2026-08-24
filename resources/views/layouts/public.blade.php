@@ -10,7 +10,7 @@
 <body class="body-texture text-brand-900 font-sans antialiased flex min-h-screen flex-col">
 
     <header class="texture-header text-white">
-        <div class="max-w-6xl mx-auto relative h-[58px] md:h-[74px]">
+        <div class="max-w-6xl mx-auto relative h-[200px]">
             <a href="{{ route('home') }}" class="absolute left-4 top-[5px]">
                 <img src="{{ asset('imgs/geoLogo.jpg') }}" alt="{{ $siteSetting?->site_name_ka }}" class="h-12 md:h-16 w-auto">
             </a>
