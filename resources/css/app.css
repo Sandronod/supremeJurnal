@@ -45,9 +45,9 @@
    the app is deployed under a subfolder. */
 .texture-header {
     position: relative;
-    background-color: #2c1a3d;
+    background-color: #6b4a83;
     background-image:
-        linear-gradient(135deg, rgba(20, 10, 32, 0.62), rgba(30, 16, 44, 0.5)),
+        linear-gradient(135deg, rgba(70, 45, 92, 0.35), rgba(90, 60, 115, 0.25)),
         url('../../public/imgs/cover2.jpg');
     background-size: cover;
     background-position: center;

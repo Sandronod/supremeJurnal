@@ -10,13 +10,16 @@
 <body class="body-texture text-brand-900 font-sans antialiased flex min-h-screen flex-col">
 
     <header class="texture-header text-white">
-        <div class="max-w-6xl mx-auto px-4 py-8 md:py-10 flex items-center justify-between">
-            <a href="{{ route('home') }}" class="font-heading text-2xl md:text-3xl tracking-wide">
-                {{ $siteSetting?->site_name ?? config('app.name') }}
+        <div class="max-w-6xl mx-auto px-4 py-8 md:py-10 flex items-center justify-between gap-4">
+            <a href="{{ route('home') }}" class="shrink-0">
+                <img src="{{ asset('imgs/geoLogo.jpg') }}" alt="{{ $siteSetting?->site_name_ka }}" class="h-12 md:h-16 w-auto">
             </a>
             @if($siteSetting?->issn)
                 <span class="hidden md:block text-sm text-white/70">ISSN {{ $siteSetting->issn }}</span>
             @endif
+            <a href="{{ route('home') }}" class="shrink-0">
+                <img src="{{ asset('imgs/engLogo.jpg') }}" alt="{{ $siteSetting?->site_name_en }}" class="h-12 md:h-16 w-auto">
+            </a>
         </div>
 
         <nav class="border-t border-white/10" x-data="{ mobileOpen: false }">
