@@ -102,9 +102,6 @@
                     @if($siteSetting?->email)
                         <a href="mailto:{{ $siteSetting->email }}" class="hover:text-white">{{ $siteSetting->email }}</a>
                     @endif
-                    @if($siteSetting?->phone)
-                        <span>{{ $siteSetting->phone }}</span>
-                    @endif
                     @if($siteSetting?->address)
                         <span>{{ $siteSetting->address }}</span>
                     @endif
