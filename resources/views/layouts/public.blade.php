@@ -14,9 +14,6 @@
             <a href="{{ route('home') }}" class="shrink-0">
                 <img src="{{ asset('imgs/geoLogo.jpg') }}" alt="{{ $siteSetting?->site_name_ka }}" class="h-12 md:h-16 w-auto">
             </a>
-            @if($siteSetting?->issn)
-                <span class="hidden md:block text-sm text-white/70">ISSN {{ $siteSetting->issn }}</span>
-            @endif
             <a href="{{ route('home') }}" class="shrink-0">
                 <img src="{{ asset('imgs/engLogo.jpg') }}" alt="{{ $siteSetting?->site_name_en }}" class="h-12 md:h-16 w-auto">
             </a>
