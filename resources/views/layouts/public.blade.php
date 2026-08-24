@@ -10,11 +10,11 @@
 <body class="body-texture text-brand-900 font-sans antialiased flex min-h-screen flex-col">
 
     <header class="texture-header text-white">
-        <div class="max-w-6xl mx-auto px-4 py-8 md:py-10 flex items-center justify-between gap-4">
-            <a href="{{ route('home') }}" class="shrink-0 -translate-y-[5px]">
+        <div class="max-w-6xl mx-auto relative h-[58px] md:h-[74px]">
+            <a href="{{ route('home') }}" class="absolute left-4 top-[5px]">
                 <img src="{{ asset('imgs/geoLogo.jpg') }}" alt="{{ $siteSetting?->site_name_ka }}" class="h-12 md:h-16 w-auto">
             </a>
-            <a href="{{ route('home') }}" class="shrink-0 translate-y-[5px]">
+            <a href="{{ route('home') }}" class="absolute right-4 bottom-[5px]">
                 <img src="{{ asset('imgs/engLogo.jpg') }}" alt="{{ $siteSetting?->site_name_en }}" class="h-12 md:h-16 w-auto">
             </a>
         </div>
