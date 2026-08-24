@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'BPG Nino Mtavruli';
-    src: url('/fonts/bpg-nino-mtavruli/bpg-nino-mtavruli.otf') format('opentype');
+    src: url('../../public/fonts/bpg-nino-mtavruli/bpg-nino-mtavruli.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -8,7 +8,7 @@
 
 @font-face {
     font-family: 'DejaVu Sans Condensed';
-    src: url('/fonts/dejavu-sans-condensed/dejavu-sans-condensed.ttf') format('truetype');
+    src: url('../../public/fonts/dejavu-sans-condensed/dejavu-sans-condensed.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -16,7 +16,7 @@
 
 @font-face {
     font-family: 'DejaVu Sans Condensed';
-    src: url('/fonts/dejavu-sans-condensed/dejavu-sans-condensed-bold.ttf') format('truetype');
+    src: url('../../public/fonts/dejavu-sans-condensed/dejavu-sans-condensed-bold.ttf') format('truetype');
     font-weight: bold;
     font-style: normal;
     font-display: swap;

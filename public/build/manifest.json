@@ -1,4 +1,16 @@
 {
+  "public/fonts/bpg-nino-mtavruli/bpg-nino-mtavruli.otf": {
+    "file": "assets/bpg-nino-mtavruli-ee1e3c29.otf",
+    "src": "public/fonts/bpg-nino-mtavruli/bpg-nino-mtavruli.otf"
+  },
+  "public/fonts/dejavu-sans-condensed/dejavu-sans-condensed-bold.ttf": {
+    "file": "assets/dejavu-sans-condensed-bold-38098d0b.ttf",
+    "src": "public/fonts/dejavu-sans-condensed/dejavu-sans-condensed-bold.ttf"
+  },
+  "public/fonts/dejavu-sans-condensed/dejavu-sans-condensed.ttf": {
+    "file": "assets/dejavu-sans-condensed-8550cd5c.ttf",
+    "src": "public/fonts/dejavu-sans-condensed/dejavu-sans-condensed.ttf"
+  },
   "public/imgs/cover2.jpg": {
     "file": "assets/cover2-12a06332.jpg",
     "src": "public/imgs/cover2.jpg"
@@ -13,7 +25,7 @@
     "src": "resources/css/admin.css"
   },
   "resources/css/app.css": {
-    "file": "assets/app-efbe2531.css",
+    "file": "assets/app-9eba85d9.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
