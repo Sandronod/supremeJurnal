@@ -6,7 +6,7 @@
     <article class="p-6 md:p-10">
         @if($isHome ?? false)
             <div class="flex items-center justify-center gap-[50px] mb-6">
-                <img src="{{ asset('imgs/Logo_of_the_Supreme_Court_of_Georgia.png') }}" alt="" class="h-[100px] w-auto">
+                <img src="{{ asset('imgs/Logo_of_the_Supreme_Court_of_Georgia.png') }}" alt="" class="h-[130px] w-auto">
                 <img src="{{ asset('imgs/frontLogo2.jpg') }}" alt="" class="h-[100px] w-auto">
             </div>
         @endif
