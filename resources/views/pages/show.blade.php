@@ -7,10 +7,10 @@
         @if($isHome ?? false)
             <div class="flex items-center justify-center gap-[50px] mb-6">
                 <img src="{{ asset('imgs/Logo_of_the_Supreme_Court_of_Georgia.png') }}" alt="" class="h-[120px] w-auto">
-                <div class="flex flex-col items-center gap-[3px]">
-                    <span class="font-heading uppercase tracking-wide text-black text-xs text-center leading-tight">საქართველოს მოსამართლეთა ასოციაცია</span>
+                <div class="flex flex-col items-center">
+                    <span class="font-heading uppercase tracking-wide text-black text-xs text-center leading-tight mb-[2px]">საქართველოს მოსამართლეთა ასოციაცია</span>
                     <img src="{{ asset('imgs/frontLogo2trans.png') }}" alt="" class="h-[100px] w-auto">
-                    <span class="font-heading uppercase tracking-wide text-black text-xs text-center leading-tight">Association of Judges of Georgia</span>
+                    <span class="font-heading uppercase tracking-wide text-black text-xs text-center leading-tight mt-[3px]">Association of Judges of Georgia</span>
                 </div>
             </div>
         @endif
