@@ -12,10 +12,10 @@
     <header class="texture-header text-white">
         <div class="max-w-6xl mx-auto relative h-[150px]">
             <a href="{{ route('home') }}" class="absolute left-4 top-[5px]">
-                <img src="{{ asset('imgs/geoLogo.jpg') }}" alt="{{ $siteSetting?->site_name_ka }}" class="h-12 md:h-16 w-auto">
+                <img src="{{ asset('imgs/georgianLogo.png') }}" alt="{{ $siteSetting?->site_name_ka }}" class="h-12 md:h-16 w-auto">
             </a>
             <a href="{{ route('home') }}" class="absolute right-4 bottom-[5px]">
-                <img src="{{ asset('imgs/engLogo.jpg') }}" alt="{{ $siteSetting?->site_name_en }}" class="h-12 md:h-16 w-auto">
+                <img src="{{ asset('imgs/englishLogo.png') }}" alt="{{ $siteSetting?->site_name_en }}" class="h-12 md:h-16 w-auto">
             </a>
         </div>
 
