@@ -11,13 +11,20 @@
         </div>
     @endif
 
-    <form method="POST" action="{{ route('admin.pages.store') }}" x-data="{ tab: 'ka' }">
+    <form method="POST" action="{{ route('admin.pages.store') }}" enctype="multipart/form-data" x-data="{ tab: 'ka' }">
         @csrf
 
         <div class="bg-white rounded-sm shadow-sm p-6 mb-4">
             <label for="slug" class="block text-sm text-brand-900/70 mb-1">Slug (URL)</label>
             <input id="slug" type="text" name="slug" value="{{ old('slug') }}" placeholder="{{ __('auto-generated from English title if left blank') }}"
                    class="block w-full rounded-sm border-brand-900/20 focus:border-brand-500 focus:ring-brand-500">
+        </div>
+
+        <div class="bg-white rounded-sm shadow-sm p-6 mb-4">
+            <label for="background_image" class="block text-sm text-brand-900/70 mb-1">{{ __('Background image') }}</label>
+            <input id="background_image" type="file" name="background_image" accept="image/png,image/jpeg,image/webp"
+                   class="block w-full text-sm">
+            <p class="text-xs text-brand-900/50 mt-1">{{ __('If left empty, the site\'s default background is used.') }}</p>
         </div>
 
         <div class="flex gap-2 mb-4">

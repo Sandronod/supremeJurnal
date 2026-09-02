@@ -11,9 +11,19 @@
         </div>
     @endif
 
-    <form method="POST" action="{{ route('admin.pages.update', $page) }}" x-data="{ tab: 'ka' }">
+    <form method="POST" action="{{ route('admin.pages.update', $page) }}" enctype="multipart/form-data" x-data="{ tab: 'ka' }">
         @csrf
         @method('PUT')
+
+        <div class="bg-white rounded-sm shadow-sm p-6 mb-4">
+            <label for="background_image" class="block text-sm text-brand-900/70 mb-1">{{ __('Background image') }}</label>
+            @if($page->background_image_path)
+                <img src="{{ asset('storage/'.$page->background_image_path) }}" alt="" class="h-24 w-auto rounded-sm mb-2 object-cover">
+            @endif
+            <input id="background_image" type="file" name="background_image" accept="image/png,image/jpeg,image/webp"
+                   class="block w-full text-sm">
+            <p class="text-xs text-brand-900/50 mt-1">{{ __('If left empty, the site\'s default background is used.') }}</p>
+        </div>
 
         <div class="flex gap-2 mb-4">
             <button type="button" @click="tab = 'ka'" class="px-4 py-2 text-sm rounded-sm" :class="tab === 'ka' ? 'bg-brand-500 text-white' : 'bg-white text-brand-900'">ქართული</button>

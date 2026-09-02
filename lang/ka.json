@@ -57,5 +57,7 @@
     "Publication date:": "გამოქვეყნების თარიღი:",
     "Files": "ფაილები",
     "Manage files": "ფაილების მართვა",
-    "PDF files are added on the next screen, after the issue is created.": "PDF ფაილების ატვირთვა შესაძლებელი იქნება ნომრის შექმნის შემდეგ, შემდეგ გვერდზე."
+    "PDF files are added on the next screen, after the issue is created.": "PDF ფაილების ატვირთვა შესაძლებელი იქნება ნომრის შექმნის შემდეგ, შემდეგ გვერდზე.",
+    "Background image": "ფონის სურათი",
+    "If left empty, the site's default background is used.": "თუ ცარიელი დარჩება, გამოყენებული იქნება საიტის ნაგულისხმევი ფონი."
 }

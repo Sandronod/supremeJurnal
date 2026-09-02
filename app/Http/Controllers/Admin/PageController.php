@@ -29,9 +29,16 @@ class PageController extends Controller
             'slug' => ['nullable', 'alpha_dash', 'max:255', 'unique:pages,slug'],
             'body_ka' => ['nullable', 'string'],
             'body_en' => ['nullable', 'string'],
+            'background_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
         ]);
 
         $data['slug'] = ($data['slug'] ?? null) ?: Str::slug($data['title_en']);
+
+        if ($request->hasFile('background_image')) {
+            $data['background_image_path'] = $request->file('background_image')->store('pages/backgrounds', 'public');
+        }
+
+        unset($data['background_image']);
 
         Page::create($data);
 
@@ -50,7 +57,14 @@ class PageController extends Controller
             'title_en' => ['required', 'string', 'max:255'],
             'body_ka' => ['nullable', 'string'],
             'body_en' => ['nullable', 'string'],
+            'background_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
         ]);
+
+        if ($request->hasFile('background_image')) {
+            $data['background_image_path'] = $request->file('background_image')->store('pages/backgrounds', 'public');
+        }
+
+        unset($data['background_image']);
 
         $page->update($data);
 

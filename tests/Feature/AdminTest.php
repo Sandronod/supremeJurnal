@@ -167,6 +167,26 @@ class AdminTest extends TestCase
         $this->assertArrayHasKey('page.indexing', MenuItem::internalTargets());
     }
 
+    public function test_admin_can_set_a_page_background_image_and_it_renders_publicly(): void
+    {
+        $user = User::factory()->create();
+        $page = Page::where('slug', 'about')->firstOrFail();
+
+        $this->actingAs($user)->put(route('admin.pages.update', $page), [
+            'title_ka' => $page->title_ka,
+            'title_en' => $page->title_en,
+            'body_ka' => $page->body_ka,
+            'body_en' => $page->body_en,
+            'background_image' => UploadedFile::fake()->image('bg.jpg'),
+        ])->assertRedirect(route('admin.pages.index'));
+
+        $page->refresh();
+        $this->assertNotNull($page->background_image_path);
+        Storage::disk('public')->assertExists($page->background_image_path);
+
+        $this->get('/ka')->assertOk()->assertSee($page->background_image_path, false);
+    }
+
     public function test_fixed_page_cannot_be_deleted_but_custom_page_can(): void
     {
         $user = User::factory()->create();

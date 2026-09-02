@@ -7,7 +7,10 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="body-texture text-brand-900 font-sans antialiased flex min-h-screen flex-col">
+<body class="body-texture text-brand-900 font-sans antialiased flex min-h-screen flex-col"
+      @if(isset($page) && $page->background_image_path)
+          style="background-image: linear-gradient(rgba(237, 242, 251, 0.88), rgba(237, 242, 251, 0.88)), url('{{ asset('storage/'.$page->background_image_path) }}');"
+      @endif>
 
     <header class="texture-header text-white">
         <div class="max-w-6xl mx-auto relative h-[150px]">

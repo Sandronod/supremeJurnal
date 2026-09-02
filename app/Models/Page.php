@@ -16,6 +16,7 @@ class Page extends Model
         'title_en',
         'body_ka',
         'body_en',
+        'background_image_path',
     ];
 
     public function getTitleAttribute(): string
