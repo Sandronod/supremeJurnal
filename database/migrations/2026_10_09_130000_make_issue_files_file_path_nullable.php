@@ -26,8 +26,11 @@ return new class extends Migration
 
     private function setFilePathNullable(bool $nullable): void
     {
+        // Raw statements don't get the connection's table prefix added automatically.
+        $prefix = DB::getTablePrefix();
+
         if (DB::getDriverName() === 'mysql') {
-            DB::statement('ALTER TABLE issue_files MODIFY file_path VARCHAR(255) '.($nullable ? 'NULL' : 'NOT NULL'));
+            DB::statement("ALTER TABLE {$prefix}issue_files MODIFY file_path VARCHAR(255) ".($nullable ? 'NULL' : 'NOT NULL'));
 
             return;
         }
@@ -48,7 +51,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        DB::statement('INSERT INTO issue_files SELECT id, issue_id, label_ka, label_en, author_ka, author_en, pages, file_path, sort_order, created_at, updated_at FROM issue_files_old');
+        DB::statement("INSERT INTO {$prefix}issue_files SELECT id, issue_id, label_ka, label_en, author_ka, author_en, pages, file_path, sort_order, created_at, updated_at FROM {$prefix}issue_files_old");
 
         Schema::drop('issue_files_old');
     }
