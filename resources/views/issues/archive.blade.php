@@ -15,6 +15,9 @@
                 <a href="{{ route('issues.show', $issue) }}" class="block bg-white rounded-sm shadow-sm overflow-hidden hover:shadow-md transition-shadow">
                     <div class="relative h-48 issue-card-cover"
                          @if($issue->cover_image_path) style="background-image: url('{{ asset('storage/'.$issue->cover_image_path) }}');" @endif>
+                        @if($issue->is_current)
+                            <span class="absolute top-3 left-3 text-xs uppercase font-heading bg-brand-500 text-white px-2 py-1">{{ __('Current') }}</span>
+                        @endif
                         <span class="absolute top-3 right-3 bg-brand-purple/80 text-white text-xs font-heading px-2 py-1 rounded-sm">#{{ $issue->number }}</span>
                     </div>
                     <div class="p-5">

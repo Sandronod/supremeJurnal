@@ -67,7 +67,7 @@ class PublicPagesTest extends TestCase
         $this->assertSame([2026, 2025, 2024], $years);
     }
 
-    public function test_archive_excludes_the_current_issue(): void
+    public function test_archive_includes_the_current_issue(): void
     {
         $current = Issue::create(['year' => 2026, 'number' => '1', 'is_current' => true, 'title_ka' => 'მიმდინარე ნომრის უნიკალური სახელი']);
         Issue::create(['year' => 2025, 'number' => '1']);
@@ -75,12 +75,13 @@ class PublicPagesTest extends TestCase
         $response = $this->get('/ka/issues');
 
         $response->assertOk();
-        $response->assertDontSee('მიმდინარე ნომრის უნიკალური სახელი');
+        $response->assertSee('მიმდინარე ნომრის უნიკალური სახელი');
+        $response->assertSee(route('issues.show', $current), false);
     }
 
     public function test_current_issue_page(): void
     {
-        $issue = Issue::create(['year' => 2026, 'number' => '1', 'is_current' => true]);
+        $issue = Issue::create(['year' => 2026, 'number' => '1', 'is_current' => true, 'title_ka' => 'ნომრის სახელი']);
         Article::create([
             'issue_id' => $issue->id,
             'title_ka' => 'ტესტ',
@@ -89,7 +90,11 @@ class PublicPagesTest extends TestCase
             'slug' => 'test-article',
         ]);
 
-        $this->get('/ka/issues/current')->assertOk()->assertSee('ტესტ', false);
+        $this->get('/ka/issues/current')
+            ->assertOk()
+            ->assertSee('ნომრის სახელი')
+            ->assertDontSee('Test Article')
+            ->assertDontSee('ნომერში შემავალი სტატიები');
     }
 
     public function test_current_issue_missing_returns_404(): void

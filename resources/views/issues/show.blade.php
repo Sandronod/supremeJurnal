@@ -73,29 +73,6 @@
             </div>
         @endif
 
-        <h2 class="text-lg text-brand-purple mb-4">{{ __('Articles in this issue') }}</h2>
-
-        @if($issue->articles->isEmpty())
-            <p class="text-brand-900/60">{{ __('No results found.') }}</p>
-        @else
-            <ul class="divide-y divide-brand-900/10">
-                @foreach($issue->articles as $article)
-                    <li class="py-4 flex items-center gap-4">
-                        @if($article->cover_image_path)
-                            <img src="{{ asset('storage/'.$article->cover_image_path) }}" alt=""
-                                 class="w-16 h-16 object-cover rounded-sm shrink-0">
-                        @endif
-                        <div>
-                            <a href="{{ route('articles.show', $article) }}" class="text-brand-900 hover:text-brand-500 font-medium">
-                                {{ $article->title }}
-                            </a>
-                            <p class="text-sm text-brand-900/60">{{ $article->authors }}</p>
-                        </div>
-                    </li>
-                @endforeach
-            </ul>
-        @endif
-
         <a href="{{ route('issues.archive') }}" class="inline-block mt-8 text-sm text-brand-600 hover:underline">
             &larr; {{ __('Back to archive') }}
         </a>
