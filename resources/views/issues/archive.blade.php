@@ -13,8 +13,10 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             @foreach($issues as $issue)
                 <a href="{{ route('issues.show', $issue) }}" class="block bg-white rounded-sm shadow-sm overflow-hidden hover:shadow-md transition-shadow">
-                    <div class="relative h-48 issue-card-cover"
-                         @if($issue->cover_image_path) style="background-image: url('{{ asset('storage/'.$issue->cover_image_path) }}');" @endif>
+                    <div class="relative @unless($issue->cover_image_path) h-48 issue-card-cover @endunless">
+                        @if($issue->cover_image_path)
+                            <img src="{{ asset('storage/'.$issue->cover_image_path) }}" alt="" class="block w-full h-auto">
+                        @endif
                         @if($issue->is_current)
                             <span class="absolute top-3 left-3 text-xs uppercase font-heading bg-brand-500 text-white px-2 py-1">{{ __('Current') }}</span>
                         @endif

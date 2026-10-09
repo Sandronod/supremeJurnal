@@ -3,8 +3,11 @@
 @section('title', $issue->label)
 
 @section('content')
-    <div class="relative h-64 md:h-80 rounded-sm overflow-hidden issue-card-cover mb-[-1px]"
-         @if($issue->cover_image_path) style="background-image: url('{{ asset('storage/'.$issue->cover_image_path) }}');" @endif>
+    {{-- An uploaded cover is shown whole at its own proportions, never cropped. --}}
+    <div class="relative rounded-sm overflow-hidden mb-[-1px] @unless($issue->cover_image_path) h-64 md:h-80 issue-card-cover @endunless">
+        @if($issue->cover_image_path)
+            <img src="{{ asset('storage/'.$issue->cover_image_path) }}" alt="" class="block w-full h-auto">
+        @endif
         @if($isCurrent)
             <span class="absolute top-4 left-4 text-xs uppercase font-heading bg-brand-500 text-white px-2 py-1">{{ __('Current') }}</span>
         @endif
