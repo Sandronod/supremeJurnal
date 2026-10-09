@@ -14,6 +14,9 @@ class IssueFile extends Model
         'issue_id',
         'label_ka',
         'label_en',
+        'author_ka',
+        'author_en',
+        'pages',
         'file_path',
         'sort_order',
     ];
@@ -26,5 +29,10 @@ class IssueFile extends Model
     public function getLabelAttribute(): string
     {
         return app()->getLocale() === 'ka' ? $this->label_ka : $this->label_en;
+    }
+
+    public function getAuthorAttribute(): ?string
+    {
+        return app()->getLocale() === 'ka' ? $this->author_ka : $this->author_en;
     }
 }

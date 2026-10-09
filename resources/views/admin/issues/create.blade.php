@@ -41,7 +41,7 @@
         </div>
 
         <div>
-            <label for="published_at" class="block text-sm text-brand-900/70 mb-1">Published at</label>
+            <label for="published_at" class="block text-sm text-brand-900/70 mb-1">{{ __('Published at') }}</label>
             <input id="published_at" type="date" name="published_at" value="{{ old('published_at') }}"
                    class="block w-full rounded-sm border-brand-900/20 focus:border-brand-500 focus:ring-brand-500">
         </div>
@@ -63,6 +63,11 @@
             <label for="cover_image" class="block text-sm text-brand-900/70 mb-1">{{ __('Cover image') }}</label>
             <input id="cover_image" type="file" name="cover_image" accept="image/png,image/jpeg,image/webp"
                    class="block w-full text-sm">
+        </div>
+
+        <div>
+            <label for="pdf" class="block text-sm text-brand-900/70 mb-1">{{ __('Full issue PDF') }}</label>
+            <input id="pdf" type="file" name="pdf" accept="application/pdf" class="block w-full text-sm">
         </div>
 
         <label class="flex items-center gap-2 text-sm text-brand-900/70">

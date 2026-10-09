@@ -17,6 +17,7 @@ class Issue extends Model
         'title_ka',
         'title_en',
         'cover_image_path',
+        'pdf_path',
         'description_ka',
         'description_en',
         'published_at',

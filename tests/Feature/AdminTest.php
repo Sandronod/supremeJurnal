@@ -109,11 +109,21 @@ class AdminTest extends TestCase
         $this->actingAs($user)->post(route('admin.issues.files.store', $issue), [
             'label_ka' => 'ნომერი 1',
             'label_en' => 'Issue 1',
+            'author_ka' => 'გიორგი ჯვარძე',
+            'author_en' => 'Giorgi Jvardze',
+            'pages' => '5-27',
             'file' => UploadedFile::fake()->create('issue.pdf', 100, 'application/pdf'),
         ])->assertRedirect(route('admin.issues.files.index', $issue));
 
         $file = $issue->files()->firstOrFail();
         $this->assertSame('Issue 1', $file->label_en);
+        $this->assertSame('Giorgi Jvardze', $file->author_en);
+        $this->assertSame('5-27', $file->pages);
+
+        $this->get("/ka/issues/{$issue->id}")
+            ->assertOk()
+            ->assertSee('გიორგი ჯვარძე')
+            ->assertSee('5-27');
         Storage::disk('public')->assertExists($file->file_path);
 
         $this->actingAs($user)

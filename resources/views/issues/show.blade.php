@@ -25,15 +25,45 @@
             </div>
         @endif
 
-        @if($issue->files->isNotEmpty())
-            <div class="flex flex-col gap-2 mb-10">
-                @foreach($issue->files as $file)
-                    <a href="{{ asset('storage/'.$file->file_path) }}" target="_blank" rel="noopener"
-                       class="flex items-center gap-2 text-brand-600 hover:underline">
-                        <span aria-hidden="true">&#128196;</span>
-                        {{ $file->label }}
-                    </a>
-                @endforeach
+        @if($issue->pdf_path || $issue->files->isNotEmpty())
+            <div class="mb-10">
+                <h2 class="text-lg text-brand-purple font-bold mb-4">
+                    # {{ $issue->number }} {{ $issue->year }}
+                    @if($issue->pdf_path)
+                        &ndash;
+                        <a href="{{ asset('storage/'.$issue->pdf_path) }}" target="_blank" rel="noopener"
+                           class="text-brand-600 hover:underline">[PDF]</a>
+                    @endif
+                </h2>
+
+                @if($issue->files->isNotEmpty())
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="border-b border-brand-900/30 text-sm text-brand-900/70">
+                                <th class="font-medium py-2 pr-4">{{ __('Contents') }}</th>
+                                <th class="font-medium py-2 pr-4 whitespace-nowrap">{{ __('Page') }}</th>
+                                <th class="font-medium py-2">PDF</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-brand-900/10">
+                            @foreach($issue->files as $file)
+                                <tr class="align-top">
+                                    <td class="py-3 pr-4">
+                                        @if($file->author)
+                                            <p class="italic text-brand-900/70">{{ $file->author }}</p>
+                                        @endif
+                                        <p class="text-brand-900">{{ $file->label }}</p>
+                                    </td>
+                                    <td class="py-3 pr-4 whitespace-nowrap text-brand-900/70">{{ $file->pages }}</td>
+                                    <td class="py-3">
+                                        <a href="{{ asset('storage/'.$file->file_path) }}" target="_blank" rel="noopener"
+                                           class="text-brand-600 hover:underline">[PDF]</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                @endif
             </div>
         @endif
 

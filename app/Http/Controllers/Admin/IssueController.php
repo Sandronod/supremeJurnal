@@ -30,7 +30,11 @@ class IssueController extends Controller
             $data['cover_image_path'] = $request->file('cover_image')->store('issues/covers', 'public');
         }
 
-        unset($data['cover_image']);
+        if ($request->hasFile('pdf')) {
+            $data['pdf_path'] = $request->file('pdf')->store('issues/pdfs', 'public');
+        }
+
+        unset($data['cover_image'], $data['pdf']);
 
         if (! empty($data['is_current'])) {
             Issue::where('is_current', true)->update(['is_current' => false]);
@@ -54,7 +58,11 @@ class IssueController extends Controller
             $data['cover_image_path'] = $request->file('cover_image')->store('issues/covers', 'public');
         }
 
-        unset($data['cover_image']);
+        if ($request->hasFile('pdf')) {
+            $data['pdf_path'] = $request->file('pdf')->store('issues/pdfs', 'public');
+        }
+
+        unset($data['cover_image'], $data['pdf']);
 
         if (! empty($data['is_current'])) {
             Issue::where('is_current', true)->where('id', '!=', $issue->id)->update(['is_current' => false]);
@@ -92,6 +100,7 @@ class IssueController extends Controller
             'published_at' => ['nullable', 'date'],
             'is_current' => ['nullable', 'boolean'],
             'cover_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
+            'pdf' => ['nullable', 'file', 'mimes:pdf', 'max:51200'],
         ]);
 
         $data['is_current'] = $request->boolean('is_current');

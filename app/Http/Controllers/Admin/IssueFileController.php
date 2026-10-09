@@ -21,6 +21,9 @@ class IssueFileController extends Controller
         $data = $request->validate([
             'label_ka' => ['required', 'string', 'max:255'],
             'label_en' => ['required', 'string', 'max:255'],
+            'author_ka' => ['nullable', 'string', 'max:255'],
+            'author_en' => ['nullable', 'string', 'max:255'],
+            'pages' => ['nullable', 'string', 'max:50'],
             'file' => ['required', 'file', 'mimes:pdf', 'max:20480'],
             'sort_order' => ['nullable', 'integer'],
         ]);

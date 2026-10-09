@@ -14,10 +14,20 @@
 
     <div class="bg-white rounded-sm shadow-sm divide-y divide-brand-900/10 mt-6 mb-8">
         @forelse($files as $file)
-            <div class="flex items-center justify-between px-6 py-4">
+            <div class="flex items-center justify-between gap-4 px-6 py-4">
                 <div>
-                    <span class="font-medium">{{ $file->label_en }}</span>
-                    <span class="text-brand-900/40">/ {{ $file->label_ka }}</span>
+                    @if($file->author_ka || $file->author_en)
+                        <p class="text-sm italic text-brand-900/70">
+                            {{ $file->author_ka }}@if($file->author_en) <span class="text-brand-900/40">/ {{ $file->author_en }}</span>@endif
+                        </p>
+                    @endif
+                    <p>
+                        <span class="font-medium">{{ $file->label_ka }}</span>
+                        <span class="text-brand-900/40">/ {{ $file->label_en }}</span>
+                    </p>
+                    @if($file->pages)
+                        <p class="text-sm text-brand-900/50">{{ __('Pages') }}: {{ $file->pages }}</p>
+                    @endif
                 </div>
                 <div class="flex items-center gap-3 text-sm shrink-0">
                     <a href="{{ asset('storage/'.$file->file_path) }}" target="_blank" class="text-brand-600 hover:underline">{{ __('Download PDF') }}</a>
@@ -51,15 +61,35 @@
             </div>
         </div>
 
-        <div>
-            <label for="file" class="block text-sm text-brand-900/70 mb-1">PDF</label>
-            <input id="file" type="file" name="file" accept="application/pdf" required class="block w-full text-sm">
+        <div class="grid grid-cols-2 gap-4">
+            <div>
+                <label for="author_ka" class="block text-sm text-brand-900/70 mb-1">{{ __('Author (Georgian)') }}</label>
+                <input id="author_ka" type="text" name="author_ka" value="{{ old('author_ka') }}"
+                       class="block w-full rounded-sm border-brand-900/20 focus:border-brand-500 focus:ring-brand-500">
+            </div>
+            <div>
+                <label for="author_en" class="block text-sm text-brand-900/70 mb-1">{{ __('Author (English)') }}</label>
+                <input id="author_en" type="text" name="author_en" value="{{ old('author_en') }}"
+                       class="block w-full rounded-sm border-brand-900/20 focus:border-brand-500 focus:ring-brand-500">
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+            <div>
+                <label for="pages" class="block text-sm text-brand-900/70 mb-1">{{ __('Pages') }}</label>
+                <input id="pages" type="text" name="pages" value="{{ old('pages') }}" placeholder="5-27"
+                       class="block w-full rounded-sm border-brand-900/20 focus:border-brand-500 focus:ring-brand-500">
+            </div>
+            <div>
+                <label for="sort_order" class="block text-sm text-brand-900/70 mb-1">{{ __('Sort order') }}</label>
+                <input id="sort_order" type="number" name="sort_order" value="{{ old('sort_order', $files->count() + 1) }}"
+                       class="block w-full rounded-sm border-brand-900/20 focus:border-brand-500 focus:ring-brand-500">
+            </div>
         </div>
 
         <div>
-            <label for="sort_order" class="block text-sm text-brand-900/70 mb-1">Sort order</label>
-            <input id="sort_order" type="number" name="sort_order" value="{{ old('sort_order', 0) }}"
-                   class="block w-full rounded-sm border-brand-900/20 focus:border-brand-500 focus:ring-brand-500">
+            <label for="file" class="block text-sm text-brand-900/70 mb-1">PDF</label>
+            <input id="file" type="file" name="file" accept="application/pdf" required class="block w-full text-sm">
         </div>
 
         <button type="submit" class="bg-brand-500 hover:bg-brand-600 text-white px-4 py-2 rounded-sm text-sm">
