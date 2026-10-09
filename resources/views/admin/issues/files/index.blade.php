@@ -22,6 +22,9 @@
                         </p>
                     @endif
                     <p>
+                        @unless($file->file_path)
+                            <span class="text-xs uppercase bg-brand-900/10 text-brand-900/70 px-1.5 py-0.5 rounded-sm mr-1">{{ __('Subheading') }}</span>
+                        @endunless
                         <span class="font-medium">{{ $file->label_ka }}</span>
                         <span class="text-brand-900/40">/ {{ $file->label_en }}</span>
                     </p>
@@ -30,7 +33,9 @@
                     @endif
                 </div>
                 <div class="flex items-center gap-3 text-sm shrink-0">
-                    <a href="{{ asset('storage/'.$file->file_path) }}" target="_blank" class="text-brand-600 hover:underline">{{ __('Download PDF') }}</a>
+                    @if($file->file_path)
+                        <a href="{{ asset('storage/'.$file->file_path) }}" target="_blank" class="text-brand-600 hover:underline">{{ __('Download PDF') }}</a>
+                    @endif
                     <form method="POST" action="{{ route('admin.issues.files.destroy', [$issue, $file]) }}" onsubmit="return confirm('{{ __('Delete') }}?')">
                         @csrf
                         @method('DELETE')
@@ -89,7 +94,8 @@
 
         <div>
             <label for="file" class="block text-sm text-brand-900/70 mb-1">PDF</label>
-            <input id="file" type="file" name="file" accept="application/pdf" required class="block w-full text-sm">
+            <input id="file" type="file" name="file" accept="application/pdf" class="block w-full text-sm">
+            <p class="text-sm text-brand-900/50 mt-1">{{ __('Leave empty to add a subheading without pages or PDF.') }}</p>
         </div>
 
         <button type="submit" class="bg-brand-500 hover:bg-brand-600 text-white px-4 py-2 rounded-sm text-sm">

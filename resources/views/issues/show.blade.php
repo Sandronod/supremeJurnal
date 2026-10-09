@@ -47,6 +47,12 @@
                         </thead>
                         <tbody class="divide-y divide-brand-900/10">
                             @foreach($issue->files as $file)
+                                @unless($file->file_path)
+                                    <tr>
+                                        <td colspan="3" class="pt-5 pb-2 font-bold text-brand-900">{{ $file->label }}</td>
+                                    </tr>
+                                    @continue
+                                @endunless
                                 <tr class="align-top">
                                     <td class="py-3 pr-4">
                                         @if($file->author)

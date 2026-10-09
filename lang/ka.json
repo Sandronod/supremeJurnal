@@ -66,5 +66,7 @@
     "Author (English)": "ავტორი (ინგლ.)",
     "Sort order": "რიგითობა",
     "Contents": "სარჩევი",
-    "Page": "გვერდი"
+    "Page": "გვერდი",
+    "Subheading": "ქვესათაური",
+    "Leave empty to add a subheading without pages or PDF.": "თუ PDF-ს არ მიამაგრებთ, ჩანაწერი სიაში ქვესათაურად ჩაჯდება (გვერდებისა და PDF-ის გარეშე)."
 }

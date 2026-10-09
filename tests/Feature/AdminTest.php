@@ -133,6 +133,24 @@ class AdminTest extends TestCase
         $this->assertDatabaseMissing('issue_files', ['id' => $file->id]);
     }
 
+    public function test_issue_file_without_pdf_is_a_subheading(): void
+    {
+        $user = User::factory()->create();
+        $issue = Issue::create(['year' => 2026, 'number' => '1']);
+
+        $this->actingAs($user)->post(route('admin.issues.files.store', $issue), [
+            'label_ka' => 'მეცნიერება',
+            'label_en' => 'Science',
+        ])->assertRedirect(route('admin.issues.files.index', $issue));
+
+        $file = $issue->files()->firstOrFail();
+        $this->assertNull($file->file_path);
+
+        $this->get("/ka/issues/{$issue->id}")
+            ->assertOk()
+            ->assertSee('<td colspan="3" class="pt-5 pb-2 font-bold text-brand-900">მეცნიერება</td>', false);
+    }
+
     public function test_admin_can_create_and_delete_an_article(): void
     {
         $user = User::factory()->create();

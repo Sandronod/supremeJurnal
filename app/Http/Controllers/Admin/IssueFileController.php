@@ -24,12 +24,13 @@ class IssueFileController extends Controller
             'author_ka' => ['nullable', 'string', 'max:255'],
             'author_en' => ['nullable', 'string', 'max:255'],
             'pages' => ['nullable', 'string', 'max:50'],
-            'file' => ['required', 'file', 'mimes:pdf', 'max:20480'],
+            'file' => ['nullable', 'file', 'mimes:pdf', 'max:20480'],
             'sort_order' => ['nullable', 'integer'],
         ]);
 
         $data['issue_id'] = $issue->id;
-        $data['file_path'] = $request->file('file')->store('issues/files', 'public');
+        // Without a PDF the entry is a subheading in the contents list.
+        $data['file_path'] = $request->hasFile('file') ? $request->file('file')->store('issues/files', 'public') : null;
         $data['sort_order'] = $data['sort_order'] ?? 0;
         unset($data['file']);
 
