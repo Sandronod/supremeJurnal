@@ -98,6 +98,8 @@ Route::prefix(config('app.route_prefix'))->group(function () {
         Route::post('/issues/{issue}/set-current', [AdminIssueController::class, 'setCurrent'])->name('issues.set-current');
         Route::get('/issues/{issue}/files', [AdminIssueFileController::class, 'index'])->name('issues.files.index');
         Route::post('/issues/{issue}/files', [AdminIssueFileController::class, 'store'])->name('issues.files.store');
+        Route::get('/issues/{issue}/files/{file}/edit', [AdminIssueFileController::class, 'edit'])->name('issues.files.edit');
+        Route::put('/issues/{issue}/files/{file}', [AdminIssueFileController::class, 'update'])->name('issues.files.update');
         Route::delete('/issues/{issue}/files/{file}', [AdminIssueFileController::class, 'destroy'])->name('issues.files.destroy');
         Route::resource('issues', AdminIssueController::class)->except(['show']);
 

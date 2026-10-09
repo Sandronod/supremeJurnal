@@ -18,6 +18,53 @@ class IssueFileController extends Controller
 
     public function store(Request $request, Issue $issue): RedirectResponse
     {
+        $data = $this->validateFile($request);
+
+        $data['issue_id'] = $issue->id;
+        // Without a PDF the entry is a subheading in the contents list.
+        $data['file_path'] = $request->hasFile('file') ? $request->file('file')->store('issues/files', 'public') : null;
+
+        IssueFile::create($data);
+
+        return redirect()->route('admin.issues.files.index', $issue)->with('status', 'issue-file-added');
+    }
+
+    public function edit(Issue $issue, IssueFile $file): View
+    {
+        abort_unless($file->issue_id === $issue->id, 404);
+
+        return view('admin.issues.files.edit', ['issue' => $issue, 'file' => $file]);
+    }
+
+    public function update(Request $request, Issue $issue, IssueFile $file): RedirectResponse
+    {
+        abort_unless($file->issue_id === $issue->id, 404);
+
+        $data = $this->validateFile($request);
+
+        if ($request->hasFile('file')) {
+            $data['file_path'] = $request->file('file')->store('issues/files', 'public');
+        } elseif ($request->boolean('remove_file')) {
+            // Dropping the PDF turns the entry into a subheading.
+            $data['file_path'] = null;
+        }
+
+        $file->update($data);
+
+        return redirect()->route('admin.issues.files.index', $issue)->with('status', 'issue-file-updated');
+    }
+
+    public function destroy(Issue $issue, IssueFile $file): RedirectResponse
+    {
+        abort_unless($file->issue_id === $issue->id, 404);
+
+        $file->delete();
+
+        return redirect()->route('admin.issues.files.index', $issue)->with('status', 'issue-file-deleted');
+    }
+
+    private function validateFile(Request $request): array
+    {
         $data = $request->validate([
             'label_ka' => ['required', 'string', 'max:255'],
             'label_en' => ['required', 'string', 'max:255'],
@@ -28,23 +75,9 @@ class IssueFileController extends Controller
             'sort_order' => ['nullable', 'integer'],
         ]);
 
-        $data['issue_id'] = $issue->id;
-        // Without a PDF the entry is a subheading in the contents list.
-        $data['file_path'] = $request->hasFile('file') ? $request->file('file')->store('issues/files', 'public') : null;
         $data['sort_order'] = $data['sort_order'] ?? 0;
         unset($data['file']);
 
-        IssueFile::create($data);
-
-        return redirect()->route('admin.issues.files.index', $issue)->with('status', 'issue-file-added');
-    }
-
-    public function destroy(Issue $issue, IssueFile $file): RedirectResponse
-    {
-        abort_unless($file->issue_id === $issue->id, 404);
-
-        $file->delete();
-
-        return redirect()->route('admin.issues.files.index', $issue)->with('status', 'issue-file-deleted');
+        return $data;
     }
 }

@@ -133,6 +133,43 @@ class AdminTest extends TestCase
         $this->assertDatabaseMissing('issue_files', ['id' => $file->id]);
     }
 
+    public function test_admin_can_edit_an_issue_file(): void
+    {
+        $user = User::factory()->create();
+        $issue = Issue::create(['year' => 2026, 'number' => '1']);
+        $file = $issue->files()->create([
+            'label_ka' => 'ძველი',
+            'label_en' => 'Old',
+            'file_path' => 'issues/files/old.pdf',
+        ]);
+
+        $this->actingAs($user)
+            ->get(route('admin.issues.files.edit', [$issue, $file]))
+            ->assertOk()
+            ->assertSee('ძველი');
+
+        $this->actingAs($user)->put(route('admin.issues.files.update', [$issue, $file]), [
+            'label_ka' => 'ახალი',
+            'label_en' => 'New',
+            'author_ka' => 'ავტორი',
+            'pages' => '10-20',
+            'sort_order' => 3,
+        ])->assertRedirect(route('admin.issues.files.index', $issue));
+
+        $file->refresh();
+        $this->assertSame('ახალი', $file->label_ka);
+        $this->assertSame('10-20', $file->pages);
+        $this->assertSame('issues/files/old.pdf', $file->file_path);
+
+        $this->actingAs($user)->put(route('admin.issues.files.update', [$issue, $file]), [
+            'label_ka' => 'ახალი',
+            'label_en' => 'New',
+            'remove_file' => '1',
+        ]);
+
+        $this->assertNull($file->fresh()->file_path);
+    }
+
     public function test_issue_file_without_pdf_is_a_subheading(): void
     {
         $user = User::factory()->create();

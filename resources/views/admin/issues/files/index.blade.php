@@ -36,6 +36,7 @@
                     @if($file->file_path)
                         <a href="{{ asset('storage/'.$file->file_path) }}" target="_blank" class="text-brand-600 hover:underline">{{ __('Download PDF') }}</a>
                     @endif
+                    <a href="{{ route('admin.issues.files.edit', [$issue, $file]) }}" class="text-brand-600 hover:underline">{{ __('Edit') }}</a>
                     <form method="POST" action="{{ route('admin.issues.files.destroy', [$issue, $file]) }}" onsubmit="return confirm('{{ __('Delete') }}?')">
                         @csrf
                         @method('DELETE')
@@ -53,50 +54,7 @@
     <form method="POST" action="{{ route('admin.issues.files.store', $issue) }}" enctype="multipart/form-data" class="bg-white rounded-sm shadow-sm p-6 space-y-4">
         @csrf
 
-        <div class="grid grid-cols-2 gap-4">
-            <div>
-                <label for="label_ka" class="block text-sm text-brand-900/70 mb-1">{{ __('Georgian title') }}</label>
-                <input id="label_ka" type="text" name="label_ka" value="{{ old('label_ka') }}" required
-                       class="block w-full rounded-sm border-brand-900/20 focus:border-brand-500 focus:ring-brand-500">
-            </div>
-            <div>
-                <label for="label_en" class="block text-sm text-brand-900/70 mb-1">{{ __('English title') }}</label>
-                <input id="label_en" type="text" name="label_en" value="{{ old('label_en') }}" required
-                       class="block w-full rounded-sm border-brand-900/20 focus:border-brand-500 focus:ring-brand-500">
-            </div>
-        </div>
-
-        <div class="grid grid-cols-2 gap-4">
-            <div>
-                <label for="author_ka" class="block text-sm text-brand-900/70 mb-1">{{ __('Author (Georgian)') }}</label>
-                <input id="author_ka" type="text" name="author_ka" value="{{ old('author_ka') }}"
-                       class="block w-full rounded-sm border-brand-900/20 focus:border-brand-500 focus:ring-brand-500">
-            </div>
-            <div>
-                <label for="author_en" class="block text-sm text-brand-900/70 mb-1">{{ __('Author (English)') }}</label>
-                <input id="author_en" type="text" name="author_en" value="{{ old('author_en') }}"
-                       class="block w-full rounded-sm border-brand-900/20 focus:border-brand-500 focus:ring-brand-500">
-            </div>
-        </div>
-
-        <div class="grid grid-cols-2 gap-4">
-            <div>
-                <label for="pages" class="block text-sm text-brand-900/70 mb-1">{{ __('Pages') }}</label>
-                <input id="pages" type="text" name="pages" value="{{ old('pages') }}" placeholder="5-27"
-                       class="block w-full rounded-sm border-brand-900/20 focus:border-brand-500 focus:ring-brand-500">
-            </div>
-            <div>
-                <label for="sort_order" class="block text-sm text-brand-900/70 mb-1">{{ __('Sort order') }}</label>
-                <input id="sort_order" type="number" name="sort_order" value="{{ old('sort_order', $files->count() + 1) }}"
-                       class="block w-full rounded-sm border-brand-900/20 focus:border-brand-500 focus:ring-brand-500">
-            </div>
-        </div>
-
-        <div>
-            <label for="file" class="block text-sm text-brand-900/70 mb-1">PDF</label>
-            <input id="file" type="file" name="file" accept="application/pdf" class="block w-full text-sm">
-            <p class="text-sm text-brand-900/50 mt-1">{{ __('Leave empty to add a subheading without pages or PDF.') }}</p>
-        </div>
+        @include('admin.issues.files._fields', ['file' => null, 'defaultSortOrder' => $files->count() + 1])
 
         <button type="submit" class="bg-brand-500 hover:bg-brand-600 text-white px-4 py-2 rounded-sm text-sm">
             {{ __('Save') }}
