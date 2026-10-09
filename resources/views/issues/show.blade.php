@@ -8,9 +8,6 @@
         @if($issue->cover_image_path)
             <img src="{{ asset('storage/'.$issue->cover_image_path) }}" alt="" class="block w-full h-auto">
         @endif
-        @if($isCurrent)
-            <span class="absolute top-4 left-4 text-xs uppercase font-heading bg-brand-500 text-white px-2 py-1">{{ __('Current') }}</span>
-        @endif
     </div>
 
     <div class="bg-white rounded-sm shadow-sm p-6 md:p-10">

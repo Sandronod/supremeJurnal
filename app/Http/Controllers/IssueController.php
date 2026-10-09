@@ -11,7 +11,7 @@ class IssueController extends Controller
     {
         $issue = Issue::with('files')->where('is_current', true)->firstOrFail();
 
-        return view('issues.show', ['issue' => $issue, 'isCurrent' => true]);
+        return view('issues.show', ['issue' => $issue]);
     }
 
     public function archive(string $locale): View
@@ -25,6 +25,6 @@ class IssueController extends Controller
     {
         $issue->load('files');
 
-        return view('issues.show', ['issue' => $issue, 'isCurrent' => $issue->is_current]);
+        return view('issues.show', ['issue' => $issue]);
     }
 }
