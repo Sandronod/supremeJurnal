@@ -54,6 +54,16 @@ class PublicPagesTest extends TestCase
         $this->get('/ka/contact')->assertOk();
     }
 
+    public function test_contact_page_links_the_website(): void
+    {
+        Setting::current()->update(['website' => 'www.supremecourt.ge']);
+
+        $this->get('/ka/contact')
+            ->assertOk()
+            ->assertSee('href="https://www.supremecourt.ge"', false)
+            ->assertSee('www.supremecourt.ge');
+    }
+
     public function test_archive_returns_200_and_is_sorted_desc(): void
     {
         Issue::create(['year' => 2024, 'number' => '1']);

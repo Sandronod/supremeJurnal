@@ -27,6 +27,7 @@ class SettingController extends Controller
             'copyright_text_en' => ['nullable', 'string', 'max:255'],
             'phone' => ['nullable', 'string', 'max:100'],
             'email' => ['nullable', 'email', 'max:255'],
+            'website' => ['nullable', 'string', 'max:255'],
             'address_ka' => ['nullable', 'string', 'max:255'],
             'address_en' => ['nullable', 'string', 'max:255'],
             'map_embed_url' => ['nullable', 'url', 'max:2000'],

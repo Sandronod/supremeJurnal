@@ -19,6 +19,13 @@
                     <dd class="text-brand-900"><a href="mailto:{{ $setting->email }}" class="hover:underline">{{ $setting->email }}</a></dd>
                 </div>
             @endif
+            @if($setting->website)
+                <div>
+                    <dt class="text-sm uppercase font-heading text-brand-900/60">{{ __('Website') }}</dt>
+                    {{-- The website may be entered without a scheme, e.g. "www.example.ge". --}}
+                    <dd class="text-brand-900"><a href="{{ preg_match('#^https?://#i', $setting->website) ? $setting->website : 'https://'.$setting->website }}" target="_blank" rel="noopener" class="hover:underline">{{ $setting->website }}</a></dd>
+                </div>
+            @endif
             @if($setting->address)
                 <div>
                     <dt class="text-sm uppercase font-heading text-brand-900/60">{{ __('Address') }}</dt>

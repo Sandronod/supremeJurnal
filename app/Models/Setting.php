@@ -17,6 +17,7 @@ class Setting extends Model
         'copyright_text_en',
         'phone',
         'email',
+        'website',
         'address_ka',
         'address_en',
         'map_embed_url',

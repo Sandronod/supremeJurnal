@@ -60,6 +60,12 @@
             </div>
         </div>
 
+        <div>
+            <label for="website" class="block text-sm text-brand-900/70 mb-1">{{ __('Website') }}</label>
+            <input id="website" type="text" name="website" value="{{ old('website', $setting->website) }}" placeholder="www.supremecourt.ge"
+                   class="block w-full rounded-sm border-brand-900/20 focus:border-brand-500 focus:ring-brand-500">
+        </div>
+
         <div class="grid grid-cols-2 gap-4">
             <div>
                 <label for="address_ka" class="block text-sm text-brand-900/70 mb-1">{{ __('Address') }} (ქართ.)</label>
