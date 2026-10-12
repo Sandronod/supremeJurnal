@@ -6,7 +6,7 @@
     <article class="p-6 md:p-10">
         @if($isHome ?? false)
             <div class="flex items-center justify-center gap-[50px] mb-6">
-                <a href="https://www.supremecourt.ge" target="_blank" rel="noopener">
+                <a href="https://www.supremecourt.ge">
                     <img src="{{ asset('imgs/Logo_of_the_Supreme_Court_of_Georgia.png') }}" alt="{{ __('Supreme Court of Georgia') }}" class="h-[120px] w-auto">
                 </a>
                 <div class="flex flex-col items-center">
